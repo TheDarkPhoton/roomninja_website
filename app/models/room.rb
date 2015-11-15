@@ -4,8 +4,6 @@ class Room < ActiveRecord::Base
   has_many :booking_days, dependent: :destroy
   accepts_nested_attributes_for :booking_days
 
-  scope :overlapping_booking, lambda { |time| find_overlapping_bookings(time) }
-
   validates :name, presence: true
 
   def self.generate_bookings
@@ -27,9 +25,10 @@ class Room < ActiveRecord::Base
     end
   end
 
-  def find_overlapping_bookings(time)
+  def self.overlapping_bookings(time)
     joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
         .where(booking_days: { day: BookingDay::DAYS[time.wday] })
         .where('? BETWEEN booking_times.begin AND booking_times.end', time)
+        .group(:name)
   end
 end

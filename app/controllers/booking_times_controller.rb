@@ -5,11 +5,9 @@ class BookingTimesController < ApplicationController
   def new
     @current = Time.now
     @booking_time = BookingTime.new
-    @rooms = Room.joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
-                 .where(booking_days: { day: BookingDay::DAYS[@current.wday] })
-                 .where('booking_times.booking_day_id IS NULL OR ? NOT BETWEEN booking_times.begin AND booking_times.end', @current)
-                 .group(:name)
 
+    @overlaps = Room.overlapping_bookings(@current).collect { |r| r.id }
+    @rooms = Room.where.not(id: @overlaps)
   end
 
   def create
