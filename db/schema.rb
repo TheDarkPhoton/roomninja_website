@@ -11,18 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115022019) do
+ActiveRecord::Schema.define(version: 20151115053801) do
 
-  create_table "bookings", force: :cascade do |t|
+  create_table "booking_days", force: :cascade do |t|
     t.string   "day"
-    t.time     "start"
-    t.time     "end"
-    t.integer  "rooms_id"
+    t.integer  "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "bookings", ["rooms_id"], name: "index_bookings_on_rooms_id"
+  add_index "booking_days", ["room_id"], name: "index_booking_days_on_room_id"
+
+  create_table "booking_times", force: :cascade do |t|
+    t.time     "begin"
+    t.time     "end"
+    t.integer  "booking_day_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "booking_times", ["booking_day_id"], name: "index_booking_times_on_booking_day_id"
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
