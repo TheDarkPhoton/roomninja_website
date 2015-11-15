@@ -81,6 +81,9 @@ GEM
     delayed_job_active_record (4.1.0)
       activerecord (>= 3.0, < 5)
       delayed_job (>= 3.0, < 5)
+    delayed_job_recurring (0.3.5)
+      delayed_job (>= 3.0)
+      delayed_job_active_record
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -214,6 +217,7 @@ DEPENDENCIES
   compass-rails (= 2.0.4)
   daemons
   delayed_job_active_record
+  delayed_job_recurring
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

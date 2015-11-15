@@ -54,6 +54,7 @@ gem 'kaminari'
 
 # delayed jobs
 gem 'delayed_job_active_record'
+gem 'delayed_job_recurring'
 gem 'daemons'
 
 # Payment System

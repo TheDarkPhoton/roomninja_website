@@ -10,6 +10,7 @@ class Room < ActiveRecord::Base
     Room.destroy_all
 
     data = JSON.load(open('http://www.inf.kcl.ac.uk/staff/andrew/rooms/somerooms.json'))
+
     data['Rooms'].each do |room|
       r = Room.new(name: room['Name'])
 
