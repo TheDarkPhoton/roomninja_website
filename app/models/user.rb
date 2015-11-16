@@ -1,17 +1,22 @@
 class User < ActiveRecord::Base
+  attr_accessor :domain
   attr_accessor :remember_token
+  before_save { self.email += "@#{self.domain}" }
   before_save { self.email = self.email.downcase }
 
   belongs_to :institution
   has_many :booking_times, dependent: :destroy
 
-  VALID_EMAIL_REGEX = /\A(“|”|\+|\-|\w)+\.?(“|”|\w)+@\w+(\.|-)(\w+(\.|-))*\w+\z/i
+  VALID_EMAIL_REGEX = /\A(“|”|\+|\-|\w)+\.?(“|”|\w)+\z/i
+  VALID_DOMAIN_REGEX = /\A\w+(\.|-)(\w+(\.|-))*\w+\z/i
+
   validates :email, {
-      presence: true,
       length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX },
       uniqueness: { case_sensitive: false }
   }
+
+  validate :domain_validation
 
   has_secure_password
   validates :password, {
@@ -58,5 +63,14 @@ class User < ActiveRecord::Base
 
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+
+  private
+
+  def domain_validation
+    unless domain =~ VALID_DOMAIN_REGEX
+      errors.add(:email, 'domain is invalid')
+      return
+    end
   end
 end

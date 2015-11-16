@@ -8,6 +8,10 @@ class UsersController < ApplicationController
 
     if params[:commit] == 'Create'
       if @user.save
+        institution = Institution.find_by(domain: "@#{@user.domain}")
+        institution.users << @user
+        institution.save
+
         log_in @user
       else
         @error = true
@@ -23,6 +27,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:id, :email, :password, :password_confirmation)
+    params.require(:user).permit(:id, :email, :domain, :password, :password_confirmation)
   end
 end
