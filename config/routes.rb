@@ -1,16 +1,21 @@
 Rails.application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # get 'bookings/index'
   get 'booking_times/new'
-  # post 'bookings/create'
 
   resources :rooms, shallow: true, only: [] do
     resources :booking_days, shallow: true, only: [] do
       resources :booking_times, shallow: true, only: [:create, :index]
     end
   end
+
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  resources :users, only: [:new, :create, :destroy]
 
   # You can have the root of your site routed with "root"
   root 'static#index'

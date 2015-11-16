@@ -1,6 +1,8 @@
 class Room < ActiveRecord::Base
   require 'open-uri'
 
+  belongs_to :institution
+
   has_many :booking_days, dependent: :destroy
   accepts_nested_attributes_for :booking_days
 

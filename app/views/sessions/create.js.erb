@@ -1,0 +1,7 @@
+<% if @canceled %>
+  $('#content-area').html('<%= j (render 'static/buttons') %>');
+<% elsif @error %>
+  $('#content-area').html('<%= j (render 'session_form') %>');
+<% else %>
+  $('#content-area').html('<%= j (render 'static/buttons') %>');
+<% end %>
