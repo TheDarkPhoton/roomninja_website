@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :domain
   attr_accessor :remember_token
-  before_save { self.email += "@#{self.domain}" }
-  before_save { self.email = self.email.downcase }
+
+  before_save :default_values, unless: :persisted?
 
   belongs_to :institution
   has_many :booking_times, dependent: :destroy
@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   validates :email, {
       length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX },
-      uniqueness: { case_sensitive: false }
+      uniqueness: { case_sensitive: false },
+      unless: :persisted?
   }
 
   validate :domain_validation
@@ -68,9 +69,11 @@ class User < ActiveRecord::Base
   private
 
   def domain_validation
-    unless domain =~ VALID_DOMAIN_REGEX
-      errors.add(:email, 'domain is invalid')
-      return
-    end
+    errors.add(:email, 'domain is invalid') unless domain =~ VALID_DOMAIN_REGEX
+  end
+
+  def default_values
+    self.email += "@#{self.domain}"
+    self.email = self.email.downcase
   end
 end

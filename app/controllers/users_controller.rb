@@ -8,9 +8,8 @@ class UsersController < ApplicationController
 
     if params[:commit] == 'Create'
       if @user.save
-        institution = Institution.find_by(domain: "@#{@user.domain}")
+        institution = Institution.find_by(domain: @user.domain)
         institution.users << @user
-        institution.save
 
         log_in @user
       else
