@@ -9,24 +9,21 @@
 
   <div id="room-list"></div>
 
-  <div>
-    <% if logged_in? %>
-      <h1 class="alert-info">User Bookings</h1>
-      <%= render 'user_bookings' %>
-    <% end %>
+  <div id="user-bookings">
+    <%= render 'user_bookings' %>
   </div>
 
-  <% Room.all.each do |r| %>
-    <%= r.name %>
-    <% r.booking_days.each do |bd| %>
-      <div style="padding-left: 25px">
-        <%= bd.day %>
-        <% bd.booking_times.each do |bt| %>
-          <div style="padding-left: 25px">
-            Begin: <%= bt.begin.to_s(:time) %>, End: <%= bt.end.to_s(:time) %><br>
-          </div>
-        <% end %>
-      </div><br>
-    <% end %>
-  <% end %>
+  <!--<% Room.all.each do |r| %>-->
+    <!--<%= r.name %>-->
+    <!--<% r.booking_days.each do |bd| %>-->
+      <!--<div style="padding-left: 25px">-->
+        <!--<%= bd.day %>-->
+        <!--<% bd.booking_times.each do |bt| %>-->
+          <!--<div style="padding-left: 25px">-->
+            <!--Begin: <%= bt.begin.to_s(:time) %>, End: <%= bt.end.to_s(:time) %><br>-->
+          <!--</div>-->
+        <!--<% end %>-->
+      <!--</div><br>-->
+    <!--<% end %>-->
+  <!--<% end %>-->
 </div>
