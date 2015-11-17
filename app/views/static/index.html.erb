@@ -9,6 +9,13 @@
 
   <div id="room-list"></div>
 
+  <div>
+    <% if logged_in? %>
+      <h1 class="alert-info">User Bookings</h1>
+      <%= render 'user_bookings' %>
+    <% end %>
+  </div>
+
   <% Room.all.each do |r| %>
     <%= r.name %>
     <% r.booking_days.each do |bd| %>

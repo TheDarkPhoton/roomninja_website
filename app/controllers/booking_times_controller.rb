@@ -14,7 +14,9 @@ class BookingTimesController < ApplicationController
     @current = Time.now
     @room = Room.find_by(name: params[:name])
     booking_day = @room.booking_days.find_by(day: BookingDay::DAYS[@current.wday])
-    booking_time = booking_day.booking_times.create(begin: @current, end: @current + 1.minute)
+    booking_time = booking_day.booking_times.create(begin: @current, end: @current + 1.hour)
     booking_time.save
+
+    current_user.booking_times << booking_time
   end
 end

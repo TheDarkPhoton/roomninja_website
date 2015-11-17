@@ -1,0 +1,15 @@
+<% current_user.booking_times.in_groups_of(3) do |slice| %>
+  <div class="row">
+    <% slice.each do |b| %>
+      <% next if b.nil?%>
+
+      <div class="col-lg-4">
+        <div class="well well-sm">
+          <h3><%= b.booking_day.room.name %></h3>
+          Begin: <%= b.begin.to_s(:time) %><br>
+          End: <%= b.end.to_s(:time) %>
+        </div>
+      </div>
+    <% end %>
+  </div><br>
+<% end %>
