@@ -3,11 +3,10 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  get 'booking_times/new'
-
+  resources :booking_times, only: [:index, :new]
   resources :rooms, shallow: true, only: [] do
     resources :booking_days, shallow: true, only: [] do
-      resources :booking_times, shallow: true, only: [:create, :index]
+      resources :booking_times, shallow: true, only: [:create]
     end
   end
 
@@ -15,10 +14,10 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :users, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :show, :destroy]
 
   # You can have the root of your site routed with "root"
-  root 'static#index'
+  root 'static#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

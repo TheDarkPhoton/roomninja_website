@@ -1,0 +1,29 @@
+<%= form_for :booking_time, remote: true do |f| %>
+  <div>
+    <%= f.text_field :room, class: 'form-control', placeholder: 'Enter partial room name (not required)' %>
+  </div><br>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.label :date, 'Booking Date:' %>
+      <%= f.date_select :date, { start_year: Time.now.year, order: [:day, :month, :year] }, class: 'form-control' %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.label :time, 'Start Time:' %>
+      <%= f.time_select :time,
+                        { combined: true, default: Time.now.change(:hour => 8, :min => 0), minute_interval: 15, time_separator: '' },
+                        { class: 'form-control' }
+      %>
+      <br>
+      <%= f.label :for, 'Book For:' %>
+      <div class="input-group">
+        <%= f.text_field :for, placeholder: '1', class: 'form-control', 'aria-describedby': 'addon-at' %>
+        <span class="input-group-addon" id="addon-at">h</span>
+        <%= f.text_field :for, placeholder: '15', class: 'form-control', 'aria-describedby': 'addon-at' %>
+        <span class="input-group-addon" id="addon-at">m</span>
+      </div>
+    </div>
+  </div>
+  <br>
+  <%= f.submit 'Find', class: 'btn btn-primary max-width' %>
+<% end %>

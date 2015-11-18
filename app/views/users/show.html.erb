@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1><%= @user.email %></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h4>Find Room</h4>
+      <div class="well well-sm">
+        <%= render 'booking_times/find_form' %>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <h4>Available Rooms</h4>
+      <div id="room-list">
+        <div class="well well-sm">
+          <%= link_to 'Find Room Now', new_booking_time_path, class: 'btn btn-primary btn-lg max-width', remote: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

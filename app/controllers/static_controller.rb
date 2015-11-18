@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
-  def index
+  def show
     @current = Time.now
 
     @overlaps = Room.overlapping_bookings(@current).collect { |r| r.id }

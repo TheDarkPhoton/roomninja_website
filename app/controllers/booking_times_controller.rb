@@ -1,5 +1,8 @@
 class BookingTimesController < ApplicationController
+  before_action :user_is_logged_in
+
   def index
+
   end
 
   def new
@@ -11,12 +14,19 @@ class BookingTimesController < ApplicationController
   end
 
   def create
-    @current = Time.now
     @room = Room.find_by(name: params[:name])
-    booking_day = @room.booking_days.find_by(day: BookingDay::DAYS[@current.wday])
-    booking_time = booking_day.booking_times.create(begin: @current, end: @current + 1.hour)
+    @booking_day = BookingDay.find(params[:booking_day_id])
+
+    @current = Time.now
+    booking_time = @booking_day.booking_times.create(begin: @current, end: @current + 1.hour)
     booking_time.save
 
     current_user.booking_times << booking_time
+  end
+
+  private
+
+  def user_is_logged_in
+
   end
 end

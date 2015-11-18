@@ -6,7 +6,42 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#roomninja-menu" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_url %>">Brand</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="roomninja-menu">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="<%= root_url %>">Home</a></li>
+          <li><a href="#">Institutions</a></li>
+          <li><a href="#">About</a></li>
+          <% if logged_in? %>
+            <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Login', login_path, remote: true, 'data-toggle': 'modal', 'data-target': '#login-modal' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="login-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div id="user-login" class="modal-content">
+        <%= render 'sessions/session_form' %>
+      </div>
+    </div>
+  </div>
 
 <%= yield %>
 
