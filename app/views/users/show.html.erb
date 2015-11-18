@@ -9,15 +9,27 @@
       <div class="well well-sm">
         <%= render 'booking_times/find_form' %>
       </div>
+
+      <h4>Your Bookings</h4>
+      <div id="user-bookings">
+        <%= render 'user_bookings' %>
+      </div>
     </div>
 
     <div class="col-lg-8">
-      <h4>Available Rooms</h4>
-      <div id="room-list">
-        <div class="well well-sm">
-          <%= link_to 'Find Room Now', new_booking_time_path, class: 'btn btn-primary btn-lg max-width', remote: true %>
+      <h4>Available Rooms (<%= link_to 'Refresh', booking_times_path, remote: true, 'hide-target': '#room-list', 'show-target': '#room-loading-bar' %>)</h4>
+      <div id="room-loading-bar">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar"
+               aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+          </div>
         </div>
       </div>
+      <div id="room-list"></div>
     </div>
   </div>
+
+  <script>
+    remote_call("GET", "<%= booking_times_path %>");
+  </script>
 </div>

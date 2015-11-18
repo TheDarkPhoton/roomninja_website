@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :booking_times, only: [:index, :new]
+  resources :booking_times, only: [:index]
   resources :rooms, shallow: true, only: [] do
     resources :booking_days, shallow: true, only: [] do
-      resources :booking_times, shallow: true, only: [:create]
+      resources :booking_times, shallow: true, only: [:new, :create]
     end
   end
 

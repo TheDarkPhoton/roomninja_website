@@ -1,1 +1,10 @@
-$('#room-list').html('');
+<% if @canceled %>
+  $('#room-id-<%= @room.id %>').parent().html('<%= j (render 'room', f: @room) %>');
+<% elsif @error %>
+  $('#room-id-<%= params[:room_id] %>').parent().html('<%= j (render 'booking_form') %>');
+<% else %>
+  $('#room-list').hide();
+  $('#room-loading-bar').show();
+  $('#user-bookings').html('<%= j (render 'users/user_bookings') %>');
+  remote_call("GET", "<%= booking_times_path %>");
+<% end %>

@@ -1,14 +1,6 @@
-<% f.each do |b| %>
-  <% next if b.nil? %>
-  <div class="col-sm-6">
-    <div class="well well-sm">
-      <h3><%= b.name %></h3>
+<div id="room-id-<%= f.id %>" class="well well-sm">
+  <h3><%= f.name %></h3>
 
-      <%= form_for [b.booking_days.find_by(day: BookingDay::DAYS[@current.wday]), @booking_time], remote: true do |form| %>
-        <%= hidden_field_tag :name, b.name %>
-        <%= form.submit 'Book', class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
+  <% booking_day = f.booking_days.find_by(day: BookingDay::DAYS[@current_time.wday]) %>
+  <%= link_to 'Choose', new_booking_day_booking_time_path(booking_day, room_id: f.id), class: 'btn btn-primary max-width', remote: true %>
+</div>
