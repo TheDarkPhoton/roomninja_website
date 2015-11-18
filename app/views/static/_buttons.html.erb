@@ -2,7 +2,7 @@
   <% if logged_in? %>
 
     <div class="col-lg-2 col-lg-offset-4">
-      <%= link_to 'Find Room Now', booking_times_new_path, class: 'btn btn-primary btn-lg max-width', remote: true %>
+      <%= link_to 'Find Room Now', new_booking_time_path, class: 'btn btn-primary btn-lg max-width', remote: true %>
     </div>
     <div class="col-lg-2">
       <%= link_to 'Logout', logout_path, class: 'btn btn-primary btn-lg max-width', remote: true, method: :delete %>

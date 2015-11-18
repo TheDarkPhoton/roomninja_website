@@ -1,8 +1,5 @@
-<% if @canceled %>
-  $('#content-area').html('<%= j (render 'static/buttons') %>');
-<% elsif @error %>
-  $('#content-area').html('<%= j (render 'session_form') %>');
+<% if @error %>
+  $('#user-login').html('<%= j (render 'session_form') %>');
 <% else %>
-  $('#content-area').html('<%= j (render 'static/buttons') %>');
-  $('#user-bookings').html('<%= j (render 'static/user_bookings') %>');
+  window.location = "<%= user_url(@user) %>";
 <% end %>

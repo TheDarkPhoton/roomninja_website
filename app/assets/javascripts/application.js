@@ -18,3 +18,20 @@
 //= require bootstrap-sprockets
 //= require cocoon
 //= require_tree .
+
+function remote_call(method, path){
+    $.ajax({
+        type: method,
+        url: path
+    });
+}
+
+$(document).ready(function(){
+    $('[show-target]').click(function(){
+        $($(this).attr('show-target')).show();
+    });
+
+    $('[hide-target]').click(function(){
+        $($(this).attr('hide-target')).hide();
+    });
+});

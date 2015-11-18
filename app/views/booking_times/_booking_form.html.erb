@@ -1,0 +1,36 @@
+<div id="room-id-<%= @room.id %>" class="well well-sm">
+  <h3><%= @room.name %></h3>
+
+  <%= form_for [@booking_day, @booking_time], remote: true do |f| %>
+    <%= hidden_field_tag :room_id, @room.id %>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.label :begin, 'Start Time:' %>
+        <%= f.time_select :begin,
+                          { combined: true, default: Time.now.change(:hour => 8, :min => 0), minute_interval: 15, time_separator: '' },
+                          { class: 'form-control' }
+        %>
+      </div>
+      <div class="col-lg-6">
+        <%= label_tag :for, 'Book For:' %>
+        <div class="input-group">
+          <%= text_field_tag :for, '', class: 'form-control', placeholder: '1', 'aria-describedby': 'addon-at' %>
+          <span class="input-group-addon" id="addon-at">h</span>
+          <%= text_field_tag :for, '', class: 'form-control', placeholder: '15', 'aria-describedby': 'addon-at' %>
+          <span class="input-group-addon" id="addon-at">m</span>
+        </div>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.submit 'Book', class: 'btn btn-primary max-width' %>
+      </div>
+
+      <div class="col-lg-6">
+        <%= f.submit 'Cancel', class: 'btn btn-primary max-width', 'data-dismiss': 'modal' %>
+      </div>
+    </div>
+  <% end %>
+</div>

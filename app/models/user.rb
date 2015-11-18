@@ -69,7 +69,14 @@ class User < ActiveRecord::Base
   private
 
   def domain_validation
-    errors.add(:email, 'domain is invalid') unless domain =~ VALID_DOMAIN_REGEX
+    unless domain =~ VALID_DOMAIN_REGEX
+      errors.add(:email, 'domain is invalid')
+      return
+    end
+
+    unless Institution.exists?(domain: domain)
+      errors.add(:email, "domain '#{domain}' does not belong to any registered institution")
+    end
   end
 
   def default_values
