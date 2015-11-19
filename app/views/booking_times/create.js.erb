@@ -3,7 +3,6 @@
 <% elsif @error %>
   $('#room-id-<%= params[:room_id] %>').parent().html('<%= j (render 'booking_form') %>');
 <% else %>
-  $('#room-list').hide();
   $('#room-loading-bar').show();
   $('#user-bookings').html('<%= j (render 'users/user_bookings') %>');
   remote_call("GET", "<%= booking_times_path %>");

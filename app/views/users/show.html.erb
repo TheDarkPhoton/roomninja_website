@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-lg-4">
-      <h4>Find Room</h4>
+      <h4>Find Rooms</h4>
       <div class="well well-sm">
         <%= render 'booking_times/find_form' %>
       </div>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-lg-8">
-      <h4>Available Rooms (<%= link_to 'Refresh', booking_times_path, remote: true, 'hide-target': '#room-list', 'show-target': '#room-loading-bar' %>)</h4>
+      <h4>Available Rooms (<%= link_to 'Refresh', booking_times_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
       <div id="room-loading-bar">
         <div class="progress">
           <div class="progress-bar progress-bar-striped active" role="progressbar"

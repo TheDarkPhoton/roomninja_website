@@ -17,8 +17,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.max-width{
+.max-width {
   width: 100%;
+}
+
+.day-select, .month-select {
+  display: inline-block;
+  width: 30%;
+}
+.year-select {
+  display: inline-block;
+  width: 35%;
 }
 
 .field_with_errors {
