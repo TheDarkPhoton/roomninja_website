@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Institution.new(name: "King's College London (University)", domain: 'kcl.ac.uk', data: 'http://www.inf.kcl.ac.uk/staff/andrew/rooms/allrooms.json').save

@@ -4,6 +4,7 @@ class ChangeBookingTimesModel < ActiveRecord::Migration
     create_table :booking_times do |t|
       t.time :begin
       t.time :end
+      t.string :status
 
       t.belongs_to :booking_day, index: true
       t.belongs_to :user, index: true

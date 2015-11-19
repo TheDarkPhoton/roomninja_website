@@ -6,4 +6,5 @@ class BookingDay < ActiveRecord::Base
 
   DAYS = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
   validates_inclusion_of :day, in: DAYS
+  validates :date, presence: true
 end

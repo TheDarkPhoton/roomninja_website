@@ -7,33 +7,38 @@ class RoomJob
 
   def perform
     Institution.all.each do |i|
-      room_generator(i)
+      generate_rooms(i)
     end
   end
 
   private
 
-  def room_generator(institution)
+  def generate_rooms(institution)
     data = JSON.load(open(institution.data))
+
+    week_days = BookingDay::DAYS
+    week_days << week_days.shift
 
     room_ids = []
     data['Rooms'].each do |room|
-      r = institution.rooms.where(is_generated: true).find_by(name: room['Name'].strip)
-      r = Room.new(name: room['Name'].strip, is_generated: true) if r.nil?
-      room_ids << r.id
+      r = institution.rooms.where(is_generated: true).find_by(internal_name: room['Name'].strip)
+      r = Room.new(internal_name: room['Name'].strip, is_generated: true) if r.nil?
 
       room['Days'].each do |day|
-        bookings_generator(r, day)
+        date = Date.today.at_beginning_of_week + week_days.index(day['Day'].strip).days
+        bookings_generator(r, day, date)
       end
 
       r.save!
+      room_ids << r.id
       institution.rooms << r if r.institution_id.nil?
     end
     institution.rooms.where(is_generated: true).where.not(id: room_ids).destroy_all
   end
 
-  def bookings_generator(room, day)
-    booking_day = room.booking_days.find_by(day: day['Day'].strip)
+  def bookings_generator(room, day, date)
+    booking_day = room.booking_days.find_by(date: date)
+    booking_day = room.booking_days.build(day: day['Day'].strip, date: date) if booking_day.nil?
 
     booking_times_saved = booking_day.booking_times.where(user_id: nil)
     bookings_processed = 0
