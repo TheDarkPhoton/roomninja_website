@@ -3,11 +3,20 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :booking_times, only: [:index]
+  # resources :booking_times, only: [:index]
+  # resources :rooms, shallow: true, only: [] do
+  #   resources :booking_days, shallow: true, only: [] do
+  #     resources :booking_times, shallow: true, only: [:new, :create]
+  #   end
+  # end
+
+  resources :booking_days, path: 'bookings', only: [:index] do
+    collection {
+      post 'find'
+    }
+  end
   resources :rooms, shallow: true, only: [] do
-    resources :booking_days, shallow: true, only: [] do
-      resources :booking_times, shallow: true, only: [:new, :create]
-    end
+    resources :booking_days, shallow: true, path: 'bookings', only: [:new, :create, :update]
   end
 
   get 'login' => 'sessions#new'

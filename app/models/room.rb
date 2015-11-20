@@ -16,6 +16,17 @@ class Room < ActiveRecord::Base
     self.internal_name
   end
 
+  def self.overlapping_bookings2(date, time)
+    joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
+        .where(booking_days: { date: date })
+        .where('(? BETWEEN booking_times.begin AND booking_times.end) OR (? BETWEEN booking_times.begin AND booking_times.end) OR (? < booking_times.begin AND ? > booking_times.end)',
+               time[:begin],
+               time[:end],
+               time[:begin],
+               time[:end])
+        .group(:internal_name)
+  end
+
   def self.overlapping_bookings(time)
     joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
         .where(booking_days: { day: BookingDay::DAYS[time.wday] })

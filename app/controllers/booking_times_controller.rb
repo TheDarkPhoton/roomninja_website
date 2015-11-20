@@ -32,6 +32,9 @@ class BookingTimesController < ApplicationController
 
   private
 
+  def booking_time_params
+  end
+
   def user_is_logged_in
 
   end

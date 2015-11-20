@@ -1,0 +1,5 @@
+var room_list = $('#room-list');
+
+room_list.html('<%= j (render 'rooms') %>');
+
+$('#room-loading-bar').hide();

@@ -7,7 +7,7 @@
     <div class="col-lg-4">
       <h4>Find Rooms</h4>
       <div class="well well-sm">
-        <%= render 'booking_times/find_form' %>
+        <%= render 'booking_days/find_form' %>
       </div>
 
       <h4>Your Bookings</h4>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-lg-8">
-      <h4>Available Rooms (<%= link_to 'Refresh', booking_times_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
+      <h4>Available Rooms on Day of xx/xx/xxxx (<%= link_to 'Refresh', booking_days_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
       <div id="room-loading-bar">
         <div class="progress">
           <div class="progress-bar progress-bar-striped active" role="progressbar"
@@ -30,6 +30,6 @@
   </div>
 
   <script>
-    remote_call("GET", "<%= booking_times_path %>");
+    remote_call("GET", "<%= booking_days_path %>");
   </script>
 </div>
