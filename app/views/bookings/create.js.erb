@@ -5,5 +5,5 @@
 <% else %>
   $('#room-loading-bar').show();
   $('#user-bookings').html('<%= j (render 'users/user_bookings') %>');
-  remote_call("GET", "<%= booking_times_path %>");
+  remote_call("GET", "<%= bookings_path %>");
 <% end %>

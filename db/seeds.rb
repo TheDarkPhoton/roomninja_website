@@ -7,3 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Institution.new(name: "King's College London (University)", domain: 'kcl.ac.uk', data: 'http://www.inf.kcl.ac.uk/staff/andrew/rooms/allrooms.json').save
+
+default = User.new(email: 'dovydas.rupsys', domain: 'kcl.ac.uk', password: 'password', password_confirmation: 'password')
+default.save
+
+Institution.find_by(domain: default.domain).users << default
+
+RoomJob.new.perform

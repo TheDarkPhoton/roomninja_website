@@ -10,13 +10,13 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  resources :booking_days, path: 'bookings', only: [:index] do
+  resources :bookings, only: [:index] do
     collection {
       post 'find'
     }
   end
   resources :rooms, shallow: true, only: [] do
-    resources :booking_days, shallow: true, path: 'bookings', only: [:new, :create, :update]
+    resources :bookings, shallow: true, only: [:new, :create]
   end
 
   get 'login' => 'sessions#new'

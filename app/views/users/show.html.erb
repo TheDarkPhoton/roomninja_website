@@ -7,7 +7,7 @@
     <div class="col-lg-4">
       <h4>Find Rooms</h4>
       <div class="well well-sm">
-        <%= render 'booking_days/find_form' %>
+        <%= render 'bookings/find_form' %>
       </div>
 
       <h4>Your Bookings</h4>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-lg-8">
-      <h4>Available Rooms on Day of xx/xx/xxxx (<%= link_to 'Refresh', booking_days_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
+      <h4 id="room-list-header">Available Rooms on Day of xx/xx/xxxx (<%= link_to 'Refresh', bookings_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
       <div id="room-loading-bar">
         <div class="progress">
           <div class="progress-bar progress-bar-striped active" role="progressbar"
@@ -30,6 +30,19 @@
   </div>
 
   <script>
-    remote_call("GET", "<%= booking_days_path %>");
+    remote_call("GET", "<%= bookings_path %>");
   </script>
+
+  <!--<% Room.all.each do |r| %>-->
+    <!--<%= r.name %>-->
+    <!--<% r.bookings.each do |b| %>-->
+      <!--<div style="padding-left: 25px">-->
+        <!--Begin: <%= b.begin.to_s(:british_datetime) %><br>-->
+        <!--End: <%= b.end.to_s(:british_datetime) %><br><br>-->
+      <!--</div>-->
+    <!--<% end %>-->
+    <!--<% if r.bookings.empty? %>-->
+      <!--<br><br>-->
+    <!--<% end %>-->
+  <!--<% end %>-->
 </div>

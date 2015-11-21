@@ -2,10 +2,8 @@
   <div class="well well-sm">
     <b class="spaced-row"><%= @room.name %></b><br><br>
 
-    <% form_name = [@booking_day, @booking_time]%>
+    <% form_name = [@room, @booking] %>
     <%= form_for form_name, remote: true, html: { class: 'form-horizontal' } do |f| %>
-      <%= hidden_field_tag :room_id, @room.id %>
-
       <div class="form-group">
         <%= f.label :begin, 'Begin', class: 'col-lg-3 control-label' %>
         <div class="col-lg-9">
@@ -21,19 +19,6 @@
           <%= f.time_select :end,
                             { combined: true, default: Time.now.change(:hour => 8, :min => 0), minute_interval: 15, time_separator: '' },
                             { class: 'form-control', 'aria-describedby': 'addon-at' } %>
-        </div>
-      </div>
-
-      <%= f.label :date, 'Booking Date:' %>
-      <div class="max-width">
-        <div class="day-select">
-          <%= select_day Time.now, { use_two_digit_numbers: true }, { class: 'form-control', id: :"#{form_name}_date_3i", name: :"#{form_name}[date(3i)]" } %>
-        </div>
-        <div class="month-select">
-          <%= select_month Date.today, { use_month_numbers: true }, { class: 'form-control', id: :"#{form_name}_date_2i", name: :"#{form_name}[date(2i)]" } %>
-        </div>
-        <div class="year-select">
-          <%= select_year Date.today, { start_year: Time.now.year }, { class: 'form-control', id: :"#{form_name}_date_1i", name: :"#{form_name}[date(1i)]" } %>
         </div>
       </div>
       <br>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BookingTimesControllerTest < ActionController::TestCase
+class BookingsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

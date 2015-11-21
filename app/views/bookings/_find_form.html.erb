@@ -1,5 +1,5 @@
 <% form_name = :room %>
-<%= form_for form_name, url: find_booking_days_path, remote: true do |f| %>
+<%= form_for form_name, url: find_bookings_path, remote: true do |f| %>
   <div>
     <%= f.text_field :name, class: 'form-control', placeholder: 'Enter partial room name (not required)' %>
   </div><br>

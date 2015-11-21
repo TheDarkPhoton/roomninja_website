@@ -3,8 +3,8 @@ class Room < ActiveRecord::Base
 
   belongs_to :institution
 
-  has_many :booking_days, dependent: :destroy
-  accepts_nested_attributes_for :booking_days
+  has_many :bookings, dependent: :destroy
+  accepts_nested_attributes_for :bookings
 
   validates :internal_name, presence: true
   validates :description, presence: true
@@ -16,22 +16,18 @@ class Room < ActiveRecord::Base
     self.internal_name
   end
 
-  def self.overlapping_bookings2(date, time)
-    joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
-        .where(booking_days: { date: date })
-        .where('(? BETWEEN booking_times.begin AND booking_times.end) OR (? BETWEEN booking_times.begin AND booking_times.end) OR (? < booking_times.begin AND ? > booking_times.end)',
-               time[:begin],
-               time[:end],
-               time[:begin],
-               time[:end])
-        .group(:internal_name)
-  end
-
-  def self.overlapping_bookings(time)
-    joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
-        .where(booking_days: { day: BookingDay::DAYS[time.wday] })
-        .where('? BETWEEN booking_times.begin AND booking_times.end', time)
-        .group(:internal_name)
+  def self.overlapping_bookings(begin_time, end_time)
+    joins('LEFT OUTER JOIN bookings ON rooms.id = bookings.room_id')
+        .where('(? > bookings.begin AND ? < bookings.end) OR
+                (? > bookings.begin AND ? < bookings.end) OR
+                (? <= bookings.begin AND ? >= bookings.end)',
+               begin_time,
+               begin_time,
+               end_time,
+               end_time,
+               begin_time,
+               end_time)
+        .group(:id)
   end
 
   private

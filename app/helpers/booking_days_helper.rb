@@ -1,2 +1,0 @@
-module BookingDaysHelper
-end

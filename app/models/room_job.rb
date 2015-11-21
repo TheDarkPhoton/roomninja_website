@@ -14,9 +14,10 @@ class RoomJob
   private
 
   def generate_rooms(institution)
-    data = JSON.load(open(institution.data))
+    data = JSON.load(open('http://www.inf.kcl.ac.uk/staff/andrew/rooms/somerooms.json'))
+    # data = JSON.load(open(institution.data))
 
-    week_days = BookingDay::DAYS
+    week_days = Booking::DAYS
     week_days << week_days.shift
 
     room_ids = []
@@ -37,43 +38,41 @@ class RoomJob
   end
 
   def bookings_generator(room, day, date)
-    booking_day = room.booking_days.find_by(date: date)
-    booking_day = room.booking_days.build(day: day['Day'].strip, date: date) if booking_day.nil?
+    saved_bookings = room.bookings.where(user_id: nil).where('? < begin AND ? > begin', date, date + 1.day)
 
-    booking_times_saved = booking_day.booking_times.where(user_id: nil)
-    bookings_processed = 0
-    day['Activities'].each_with_index do |activities, index|
-      if index >= booking_times_saved.count
-        bookings_processed = index
+    update_count = 0
+    day['Activities'].each_with_index do |activity, index|
+      if index >= saved_bookings.count
+        update_count = index
         break
       end
-      booking_times_saved[index].update_attributes(begin: activities['Start'], end: activities['End'])
-      check_if_overlaps(booking_day, booking_times_saved[index])
+
+      begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
+      end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
+
+      saved_bookings[index].update_attributes(begin: begin_date, end: end_date, status: Booking::BOOKED)
+      check_if_overlaps(room, saved_bookings[index])
     end
 
-    if day['Activities'].count < booking_times_saved.count
-      booking_times_saved.offset(day['Activities'].count).destroy_all
-    elsif day['Activities'].count > booking_times_saved.count
-      day['Activities'].drop(bookings_processed).each do |activities|
-        booking_time = booking_day.booking_times.build(begin: activities['Start'], end: activities['End'])
-        check_if_overlaps(booking_day, booking_time)
+    if day['Activities'].count < saved_bookings.count
+      saved_bookings.offset(day['Activities'].count).destroy_all
+    elsif day['Activities'].count > saved_bookings.count
+      day['Activities'].drop(update_count).each do |activity|
+        begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
+        end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
+
+        booking = room.bookings.build(begin: begin_date, end: end_date, status: Booking::BOOKED)
+        booking.save
+
+        check_if_overlaps(room, booking)
       end
     end
-
-    booking_day.save!
   end
 
-  def check_if_overlaps(booking_day, booking_time)
-    booking_begin = Time.parse(booking_time.begin.to_s(:time))
-    booking_end = Time.parse(booking_time.end.to_s(:time))
+  def check_if_overlaps(room, booking)
+    booking_begin = booking.begin.to_s(:db)
+    booking_end = booking.end.to_s(:db)
 
-    overlaps = booking_day.booking_times.where.not(id: booking_time.id).where(
-        '(? BETWEEN begin AND end) OR (? BETWEEN begin AND end) OR (? < begin AND ? > end)',
-        booking_begin,
-        booking_end,
-        booking_begin,
-        booking_end)
-
-    overlaps.destroy_all
+    room.bookings.where.not(id: booking.id).where('user_id IS NOT NULL').overlapping(booking_begin, booking_end).destroy_all
   end
 end
