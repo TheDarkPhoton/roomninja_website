@@ -1,0 +1,9 @@
+<div id="room-id-<%= f.id %>" class="col-sm-4">
+  <%= link_to new_room_booking_path(f), remote: true, class: 'complex-link' do %>
+    <div class="well well-sm selectable">
+      <b class="spaced-row"><%= f.name %></b><br>
+      <p>Description: <%= f.description %></p>
+      <p>Capacity: <%= f.capacity %></p>
+    </div>
+  <% end %>
+</div>

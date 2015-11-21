@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   before_save :default_values, unless: :persisted?
 
   belongs_to :institution
-  has_many :booking_times, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A(“|”|\+|\-|\w)+\.?(“|”|\w)+\z/i
   VALID_DOMAIN_REGEX = /\A\w+(\.|-)(\w+(\.|-))*\w+\z/i

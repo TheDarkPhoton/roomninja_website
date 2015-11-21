@@ -21,13 +21,33 @@
   width: 100%;
 }
 
+.date-select {
+  display: inline-block;
+  width: 32%;
+}
+
+.time-select {
+  display: inline-block;
+  width: 48%;
+}
+
 .day-select, .month-select {
   display: inline-block;
   width: 30%;
 }
 .year-select {
   display: inline-block;
-  width: 35%;
+  width: 36%;
+}
+
+.selectable:hover {
+  border-color: rgba(47, 117, 203, 0.5);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(47, 117, 203, 0.4);
+  outline: 0 none;
+}
+a.complex-link {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .field_with_errors {

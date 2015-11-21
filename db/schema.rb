@@ -11,28 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116174953) do
+ActiveRecord::Schema.define(version: 20151120183306) do
 
-  create_table "booking_days", force: :cascade do |t|
-    t.string   "day"
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "begin"
+    t.datetime "end"
+    t.string   "status"
     t.integer  "room_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "booking_days", ["room_id"], name: "index_booking_days_on_room_id"
-
-  create_table "booking_times", force: :cascade do |t|
-    t.time     "begin"
-    t.time     "end"
-    t.integer  "booking_day_id"
-    t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "booking_times", ["booking_day_id"], name: "index_booking_times_on_booking_day_id"
-  add_index "booking_times", ["user_id"], name: "index_booking_times_on_user_id"
+  add_index "bookings", ["room_id"], name: "index_bookings_on_room_id"
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -59,7 +51,8 @@ ActiveRecord::Schema.define(version: 20151116174953) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string   "name"
+    t.string   "internal_name"
+    t.string   "alias"
     t.string   "description"
     t.integer  "capacity"
     t.boolean  "is_generated"

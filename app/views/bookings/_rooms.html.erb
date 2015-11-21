@@ -2,9 +2,7 @@
   <div class="row">
     <% slice.each do |r| %>
       <% next if r.nil? %>
-      <div class="col-sm-4">
-        <%= render 'room', f: r %>
-      </div>
+      <%= render 'room', f: r %>
     <% end %>
   </div>
 <% end %>

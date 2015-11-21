@@ -1,7 +1,7 @@
 <% if @canceled %>
-  $('#room-id-<%= @room.id %>').parent().html('<%= j (render 'room', f: @room) %>');
+  $('#room-id-<%= @room.id %>').replaceWith('<%= j (render 'room', f: @room) %>');
 <% elsif @error %>
-  $('#room-id-<%= params[:room_id] %>').parent().html('<%= j (render 'booking_form') %>');
+  $('#room-id-<%= params[:room_id] %>').replaceWith('<%= j (render 'booking_form') %>');
 <% else %>
   $('#room-loading-bar').show();
   $('#user-bookings').html('<%= j (render 'users/user_bookings') %>');

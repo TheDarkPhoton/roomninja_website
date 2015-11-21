@@ -3,19 +3,31 @@ class Room < ActiveRecord::Base
 
   belongs_to :institution
 
-  has_many :booking_days, dependent: :destroy
-  accepts_nested_attributes_for :booking_days
+  has_many :bookings, dependent: :destroy
+  accepts_nested_attributes_for :bookings
 
-  validates :name, presence: true
+  validates :internal_name, presence: true
   validates :description, presence: true
   validates :capacity, presence: true
   validates_inclusion_of :is_generated, in: [true, false]
 
-  def self.overlapping_bookings(time)
-    joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
-        .where(booking_days: { day: BookingDay::DAYS[time.wday] })
-        .where('? BETWEEN booking_times.begin AND booking_times.end', time)
-        .group(:name)
+  def name
+    return self.alias unless self.alias.blank?
+    self.internal_name
+  end
+
+  def self.overlapping_bookings(begin_time, end_time)
+    joins('LEFT OUTER JOIN bookings ON rooms.id = bookings.room_id')
+        .where('(? > bookings.begin AND ? < bookings.end) OR
+                (? > bookings.begin AND ? < bookings.end) OR
+                (? <= bookings.begin AND ? >= bookings.end)',
+               begin_time,
+               begin_time,
+               end_time,
+               end_time,
+               begin_time,
+               end_time)
+        .group(:id)
   end
 
   private
@@ -24,10 +36,5 @@ class Room < ActiveRecord::Base
     self.description ||= 'No description provided.'
     self.capacity ||= 0
     self.is_generated ||= false
-
-    BookingDay::DAYS.each do |d|
-      self.booking_days.build(day: d)
-    end
-    self.save
   end
 end

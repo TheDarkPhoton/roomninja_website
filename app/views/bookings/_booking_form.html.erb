@@ -1,0 +1,37 @@
+<div id="room-id-<%= @room.id %>" class="col-sm-4">
+  <div class="well well-sm">
+    <b class="spaced-row"><%= @room.name %></b><br><br>
+
+    <% form_name = [@room, @booking] %>
+    <%= form_for form_name, remote: true, html: { class: 'form-horizontal' } do |f| %>
+      <div class="form-group">
+        <%= f.label :begin, 'Begin', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.time_select :begin,
+                            { combined: true, default: Time.now.change(:hour => 8, :min => 0), minute_interval: 15, time_separator: '' },
+                            { class: 'form-control', 'aria-describedby': 'addon-at' } %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :end, 'End', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.time_select :end,
+                            { combined: true, default: Time.now.change(:hour => 8, :min => 0), minute_interval: 15, time_separator: '' },
+                            { class: 'form-control', 'aria-describedby': 'addon-at' } %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <%= f.submit 'Book', class: 'btn btn-primary max-width' %>
+        </div>
+
+        <div class="col-xs-6">
+          <%= f.submit 'Cancel', class: 'btn btn-primary max-width' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
