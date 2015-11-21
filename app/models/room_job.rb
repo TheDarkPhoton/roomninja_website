@@ -7,15 +7,15 @@ class RoomJob
 
   def perform
     Institution.all.each do |i|
-      generate_rooms(i)
+      generate_rooms(i) unless i.data.blank?
     end
   end
 
   private
 
   def generate_rooms(institution)
-    data = JSON.load(open('http://www.inf.kcl.ac.uk/staff/andrew/rooms/somerooms.json'))
-    # data = JSON.load(open(institution.data))
+    # data = JSON.load(open('http://www.inf.kcl.ac.uk/staff/andrew/rooms/somerooms.json'))
+    data = JSON.load(open(institution.data))
 
     week_days = Booking::DAYS
     week_days << week_days.shift
@@ -50,7 +50,7 @@ class RoomJob
       begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
       end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
 
-      saved_bookings[index].update_attributes(begin: begin_date, end: end_date, status: Booking::BOOKED)
+      saved_bookings[index].update_attributes(begin: begin_date, end: end_date, status: Booking::GENERATED)
       check_if_overlaps(room, saved_bookings[index])
     end
 
@@ -61,8 +61,8 @@ class RoomJob
         begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
         end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
 
-        booking = room.bookings.build(begin: begin_date, end: end_date, status: Booking::BOOKED)
-        booking.save
+        booking = room.bookings.build(begin: begin_date, end: end_date, status: Booking::GENERATED)
+        booking.save!
 
         check_if_overlaps(room, booking)
       end

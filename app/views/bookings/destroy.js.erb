@@ -1,0 +1,3 @@
+$('#user-booking-<%= @booking.id %>').remove();
+$('#room-loading-bar').show();
+remote_call("GET", "<%= bookings_path %>");
