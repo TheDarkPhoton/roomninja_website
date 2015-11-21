@@ -65,6 +65,7 @@ class BookingsController < ApplicationController
   end
 
   def user_is_logged_in
+    flash[:danger] = "You don't have permission for this action"
     render js: "window.location = '#{root_url}'" unless logged_in?
   end
 end
