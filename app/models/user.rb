@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
   validates :email, {
       length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX },
-      uniqueness: { case_sensitive: false },
       unless: :persisted?
   }
 
+  validate :email_uniqueness
   validate :domain_validation
 
   has_secure_password
@@ -67,6 +67,12 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def email_uniqueness
+    if User.exists?(email: "#{self.email.downcase}@#{self.domain.downcase}")
+      errors.add(:email, 'email address is already in use')
+    end
+  end
 
   def domain_validation
     unless domain =~ VALID_DOMAIN_REGEX
