@@ -46,7 +46,22 @@
     </div>
   </div>
 
+  <div id="flashes" class="container">
+    <% if flash.count > 0 %>
+      <%= render 'flashes' %>
+      <script>
+        $(document).ready(function() {
+          var button = $("#flash-button");
+          if (button.length)
+            button.get(0).click();
+        });
+      </script>
+    <% end %>
+  </div>
+
   <%= yield %>
+
+  <%= render 'popup_modal' %>
 
   <!--<%= debug(params) if Rails.env.development? %>-->
 </body>

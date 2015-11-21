@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     }
   end
   resources :rooms, shallow: true, only: [] do
-    resources :bookings, shallow: true, only: [:new, :create]
+    resources :bookings, shallow: true, only: [:new, :create, :destroy]
   end
 
   get 'login' => 'sessions#new'

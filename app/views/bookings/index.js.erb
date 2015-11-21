@@ -1,6 +1,4 @@
 var room_list = $('#room-list');
 
 room_list.html('<%= j (render 'rooms') %>');
-
-$('#room-list-header').html("Available Rooms on <%= Booking::DAYS[@datetime.wday] %> of <%= @datetime.day %>/<%= @datetime.month %>/<%= @datetime.year %>");
 $('#room-loading-bar').hide();
