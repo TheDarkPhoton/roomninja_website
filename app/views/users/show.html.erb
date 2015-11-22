@@ -1,3 +1,7 @@
+<% unless @user.verified? %>
+  <% flash.now[:warning] = render partial: 'activate_email_warning' %>
+<% end %>
+
 <div class="container">
   <div class="jumbotron text-center">
     <h1><%= @user.email %></h1>

@@ -12,6 +12,7 @@ class Booking < ActiveRecord::Base
   validate :is_not_overlapping
   validate :booking_length
   validate :booking_datetime
+  validate :owner
 
   DAYS = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
@@ -74,6 +75,12 @@ class Booking < ActiveRecord::Base
   def booking_datetime
     if self.begin < DateTime.now
       errors.add(:base, 'Booking start date and time must be in the future')
+    end
+  end
+
+  def owner
+    unless self.user.verified?
+      errors.add(:base, 'You must first verify your email before you can make any bookings')
     end
   end
 
