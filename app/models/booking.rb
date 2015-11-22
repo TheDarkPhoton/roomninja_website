@@ -11,6 +11,7 @@ class Booking < ActiveRecord::Base
   validates :end, presence: true
   validate :is_not_overlapping
   validate :booking_length
+  validate :booking_datetime
 
   DAYS = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
@@ -23,7 +24,7 @@ class Booking < ActiveRecord::Base
   validates_inclusion_of :status, in: STATUSES
 
   def form_name
-    "#{self.room.name} booking form"
+    "#{self.room.name} booking"
   end
 
   def day
@@ -65,7 +66,14 @@ class Booking < ActiveRecord::Base
 
     existing_booking_length = self.user.bookings.map(&:length).inject(0, &:+)
     if !self.user.nil? && (existing_booking_length + self.length) > Booking::booking_allowance
-      errors.add(:base, "You can have #{Booking::booking_allowance.to_time_string} worth of active bookings in total, this booking would exceed that limit. Your current bookings take #{existing_booking_length.to_time_string} in total, you have #{(5.hours - existing_booking_length).to_time_string} left on your allowance.")
+      errors.add(:base, "You can have #{Booking::booking_allowance.to_time_string} worth of active bookings in total, this booking would exceed that limit.")
+      errors.add(:base, "Your current bookings take #{existing_booking_length.to_time_string} in total, you have #{(5.hours - existing_booking_length).to_time_string} left on your allowance.")
+    end
+  end
+
+  def booking_datetime
+    if self.begin < DateTime.now
+      errors.add(:base, 'Booking start date and time must be in the future')
     end
   end
 

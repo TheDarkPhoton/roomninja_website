@@ -1,5 +1,6 @@
-<% form_name = :room %>
-<%= form_for form_name, url: find_bookings_path, remote: true do |f| %>
+<%= form_for @find_rooms, url: find_bookings_path, remote: true do |f| %>
+  <%= render('flash_error_messages', f: @find_rooms) %>
+
   <div>
     <%= f.text_field :name, class: 'form-control', placeholder: 'Enter partial room name (not required)' %>
   </div><br>
@@ -15,7 +16,7 @@
       <%= f.label :begin, 'Start Time:' %>
       <div class="max-width">
         <%= f.time_select :begin,
-                          { value: Time.now, time_separator: '', ignore_date: true },
+                          { time_separator: '', ignore_date: true },
                           { class: 'form-control time-select' }
         %>
       </div>
@@ -23,9 +24,9 @@
     <div class="col-lg-6">
       <%= f.label :for, 'Length:' %>
       <div class="input-group">
-        <%= f.text_field :for_hours, value: 1, placeholder: '1', class: 'form-control', 'aria-describedby': 'addon-search-length' %>
+        <%= f.text_field :for_hours, placeholder: '1', class: 'form-control', 'aria-describedby': 'addon-search-length' %>
         <span class="input-group-addon" id="addon-search-length">h</span>
-        <%= f.text_field :for_minutes, value: 0, placeholder: '15', class: 'form-control', 'aria-describedby': 'addon-search-length' %>
+        <%= f.text_field :for_minutes, placeholder: '15', class: 'form-control', 'aria-describedby': 'addon-search-length' %>
         <span class="input-group-addon" id="addon-search-length">m</span>
       </div>
     </div>

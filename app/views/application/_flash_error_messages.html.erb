@@ -1,5 +1,5 @@
 <% title = capture_html do %>
-  <%= f.form_name.nil? ? 'Form' : f.form_name %> contains <%= pluralize(f.errors[:base].count, 'error') %>
+  <%= f.form_name %> form contains <%= pluralize(f.errors[:base].count, 'error') %>
 <% end %>
 
 <% message = capture_html do %>
@@ -15,13 +15,13 @@
 </div>
 
 <script>
-  var flash_errors = $('#flash-errors');
-  assign_modal_event(flash_errors);
-
-  var button = flash_errors.children("#flash-error-messages-button");
-
-  if (button.length)
-    button.get(0).click();
-
-  button.remove();
+  $(document).ready(function() {
+    var flash_errors = $('#flash-errors');
+    assign_modal_event(flash_errors);
+    var button = $("#flash-error-messages-button");
+    if (button.length){
+      button.get(0).click();
+    }
+    flash_errors.remove();
+  });
 </script>

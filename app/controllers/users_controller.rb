@@ -26,9 +26,11 @@ class UsersController < ApplicationController
 
   def show
     @user = @current_user
+    @find_rooms = FindRoom.new
   end
 
   def destroy
+
   end
 
   private
@@ -38,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def user_is_logged_in
-    if logged_in? && @current_user.id == params[:id]
+    unless logged_in? && @current_user.id != params[:id]
       flash[:danger] = "You don't have permission to access this page"
       redirect_to root_url
     end

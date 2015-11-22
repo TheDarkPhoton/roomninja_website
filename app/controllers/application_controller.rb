@@ -35,7 +35,18 @@ class ApplicationController < ActionController::Base
       hour = (params[(label.to_s + '(4i)').to_sym] || 0).to_i
       minute = (params[(label.to_s + '(5i)').to_sym] || 0).to_i
       second = (params[(label.to_s + '(6i)').to_sym] || 0).to_i
-      return DateTime.parse("#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}")
+
+      params.except!(
+          (label.to_s + '(1i)').to_sym,
+          (label.to_s + '(2i)').to_sym,
+          (label.to_s + '(3i)').to_sym,
+          (label.to_s + '(4i)').to_sym,
+          (label.to_s + '(5i)').to_sym,
+          (label.to_s + '(6i)').to_sym)
+
+      datetime = DateTime.parse("#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}")
+      params[label] = datetime
+      return datetime
     rescue => e
       return nil
     end
