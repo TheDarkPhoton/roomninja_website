@@ -1,5 +1,6 @@
 module ApplicationHelper
   def capture_html(&block)
-    capture(&block).gsub('"', "'") if block_given?
+    content = capture(&block) if block_given?
+    content.gsub('"', "'") unless content.nil?
   end
 end

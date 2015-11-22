@@ -3,7 +3,7 @@
     <b class="spaced-row"><%= @room.name %></b><br>
 
     <%= form_for [@room, @booking], remote: true, html: { class: 'form-horizontal' } do |f| %>
-      <%= render 'error_message', f: @booking, ff: :base %>
+      <%= render('flash_error_messages', f: @booking) %>
 
       <%= f.label :begin, 'Booking Date:' %>
       <div class="max-width">
@@ -14,7 +14,7 @@
       <div class="form-group">
         <%= f.label :begin, 'Begin:', class: 'col-lg-3 control-label' %>
         <div class="col-lg-9">
-          <%= f.time_select :begin, { time_separator: '' }, { class: 'form-control time-select', 'aria-describedby': 'addon-at' } %>
+          <%= f.time_select :begin, { time_separator: '', ignore_date: true }, { class: 'form-control time-select', 'aria-describedby': 'addon-at' } %>
         </div>
       </div>
 

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
       unless: :persisted?
   }
 
-  validate :email_uniqueness
+  validate :email_uniqueness, unless: :persisted?
   validate :domain_validation
 
   has_secure_password
@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
     length: { minimum: 6, maximum: 255 },
     allow_blank: true
   }
+
+  validates_inclusion_of :is_verified, in: [true, false]
+
+  def verified?
+    self.is_verified
+  end
 
   def new_reset_token
     self.new_unique_token(:reset_token)
@@ -49,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def remember
-    self.remember_token = User.new_token
+    self.remember_token = SecureRandom.urlsafe_base64
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
@@ -60,10 +66,6 @@ class User < ActiveRecord::Base
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
-  end
-
-  def User.new_token
-    SecureRandom.urlsafe_base64
   end
 
   private
@@ -88,5 +90,6 @@ class User < ActiveRecord::Base
   def default_values
     self.email += "@#{self.domain}"
     self.email = self.email.downcase
+    self.is_verified = false
   end
 end
