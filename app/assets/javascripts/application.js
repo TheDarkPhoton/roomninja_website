@@ -26,6 +26,18 @@ function remote_call(method, path){
     });
 }
 
+function assign_show_target(identifier){
+    $(identifier).find('[show-target]').click(function(){
+        $($(this).attr('show-target')).show();
+    });
+}
+
+function assign_hide_target(identifier){
+    $(identifier).find('[hide-target]').click(function(){
+        $($(this).attr('hide-target')).hide();
+    });
+}
+
 $(document).ready(function(){
     $('[show-target]').click(function(){
         $($(this).attr('show-target')).show();

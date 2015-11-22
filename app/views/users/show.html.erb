@@ -1,3 +1,7 @@
+<% unless @user.verified? %>
+  <% flash.now[:warning] = render partial: 'activate_email_warning' %>
+<% end %>
+
 <div class="container">
   <div class="jumbotron text-center">
     <h1><%= @user.email %></h1>
@@ -7,7 +11,9 @@
     <div class="col-lg-4">
       <h4>Find Rooms</h4>
       <div class="well well-sm">
-        <%= render 'bookings/find_form' %>
+        <div id="find-form">
+          <%= render 'bookings/find_form' %>
+        </div>
       </div>
 
       <h4>Your Bookings</h4>

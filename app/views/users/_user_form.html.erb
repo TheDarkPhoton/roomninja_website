@@ -3,19 +3,19 @@
   <h4 class="modal-title">User Registration</h4>
 </div>
 
-<%= form_for @user, remote: true do |f| %>
+<%= form_for @user, remote: true, autocomplete: 'off' do |f| %>
   <div class="modal-body">
     <div>
       <%= render 'error_message', f: @user, ff: :email %>
       <div class="input-group">
-        <%= f.text_field :email, class: 'form-control', placeholder: 'firstname.lastname', 'aria-describedby': 'addon-at' %>
+        <%= f.text_field :email, class: 'form-control', autocomplete: 'off', placeholder: 'firstname.lastname', 'aria-describedby': 'addon-at' %>
         <span class="input-group-addon" id="addon-at">@</span>
 
         <% if @user.errors[:email].present? %>
           <div class="field_with_errors">
         <% end %>
 
-        <%= f.text_field :domain, class: 'form-control', placeholder: 'domain.ac.uk', 'aria-describedby': 'addon-at' %>
+        <%= f.text_field :domain, class: 'form-control', autocomplete: 'off', placeholder: 'domain.ac.uk', 'aria-describedby': 'addon-at' %>
 
         <% if @user.errors[:email].present? %>
           </div>
@@ -25,12 +25,12 @@
 
     <div>
       <%= render 'error_message', f: @user, ff: :password %>
-      <%= f.password_field :password, class: 'form-control', placeholder: 'password' %>
+      <%= f.password_field :password, class: 'form-control', autocomplete: 'off', placeholder: 'password' %>
     </div><br>
 
     <div>
       <%= render 'error_message', f: @user, ff: :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'password confirmation' %>
+      <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off', placeholder: 'password confirmation' %>
     </div>
   </div>
 
