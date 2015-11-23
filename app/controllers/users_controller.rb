@@ -13,8 +13,8 @@ class UsersController < ApplicationController
         institution = Institution.find_by(domain: @user.domain)
         institution.users << @user
 
+        UserMailer.delay.welcome(@user)
         flash[:success] = "Welcome to the user's panel, this page will allow you to search and make bookings"
-        flash[:warning] = 'Warning! You have to activate your account before you can make any bookings'
         log_in @user
       else
         @error = true
@@ -31,20 +31,6 @@ class UsersController < ApplicationController
 
   def destroy
 
-  end
-
-  def activate
-    @user = User.find_by(activation_token: params[:id])
-
-    if @user.verified
-      flash[:success] = 'Account is already verified... Activation not required.'
-    else
-      @user.verified = true
-      @user.save
-      flash[:success] = 'Account was successfully activated!'
-    end
-
-    redirect_to root_path
   end
 
   private
