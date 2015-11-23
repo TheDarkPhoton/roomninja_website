@@ -248,7 +248,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/config/database.yml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/workspace.xml" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -558,7 +558,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448284170719</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="removed idea workspace file from git">
+      <created>1448284315933</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1448284315933</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -598,7 +604,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Working sql query that finds only those rooms that don't have anything booked at this point in time." />
     <MESSAGE value="Working sql query that finds only those rooms that don't have anything booked at this point in time. (remaining files)" />
     <MESSAGE value="Improved sql query" />
     <MESSAGE value="Implemented recurring jobs that regenerate bookings once an hour" />
@@ -623,7 +628,8 @@
     <MESSAGE value="Emails are now sent when user is create&#10;&#10;removed some security related files from git" />
     <MESSAGE value="New user validation corrections.&#10;&#10;Emails are no longer case sensitive. Also modified email regex to allow dashes properly." />
     <MESSAGE value="Correct some problems with user creation and case sensitive emails." />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct some problems with user creation and case sensitive emails." />
+    <MESSAGE value="removed idea workspace file from git" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed idea workspace file from git" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
