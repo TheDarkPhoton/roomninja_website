@@ -21,6 +21,7 @@
 
 function remote_call(method, path){
     $.ajax({
+        dataType: 'script',
         type: method,
         url: path
     });

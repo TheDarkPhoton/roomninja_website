@@ -33,6 +33,20 @@ class UsersController < ApplicationController
 
   end
 
+  def activate
+    @user = User.find_by(activation_token: params[:id])
+
+    if @user.verified
+      flash[:success] = 'Account is already verified... Activation not required.'
+    else
+      @user.verified = true
+      @user.save
+      flash[:success] = 'Account was successfully activated!'
+    end
+
+    redirect_to root_path
+  end
+
   private
 
   def user_params

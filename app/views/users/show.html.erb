@@ -1,5 +1,5 @@
 <% unless @user.verified? %>
-  <% flash.now[:warning] = render partial: 'activate_email_warning' %>
+  <% flash.now[:warning] = render 'activate_email_warning' %>
 <% end %>
 
 <div class="container">
