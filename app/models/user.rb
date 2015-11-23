@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
 
   after_initialize :init_values, unless: :persisted?
   before_save :default_values, unless: :persisted?
+  before_validation :modify_values, unless: :persisted?
 
   belongs_to :institution
   has_many :bookings, dependent: :destroy
 
-  VALID_EMAIL_REGEX = /\A(“|”|\+|\-|\w)+\.?(“|”|\w)+\z/i
+  VALID_EMAIL_REGEX = /\A((“|”|\+|\-|\w)+\.?)+\z/i
   VALID_DOMAIN_REGEX = /\A\w+(\.|-)(\w+(\.|-))*\w+\z/i
 
   validates :email, {
@@ -93,8 +94,13 @@ class User < ActiveRecord::Base
     self.new_unique_token(:activation_token)
   end
 
+  def modify_values
+    self.email = self.email.downcase
+    self.domain = self.domain.downcase
+  end
+
   def default_values
-    self.email += "@#{self.domain}"
+    self.email += "@#{self.domain.downcase}"
     self.email = self.email.downcase
   end
 end
