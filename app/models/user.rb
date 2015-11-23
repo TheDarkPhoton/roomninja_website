@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessor :domain
   attr_accessor :remember_token
 
+  after_initialize :init_values, unless: :persisted?
   before_save :default_values, unless: :persisted?
 
   belongs_to :institution
@@ -17,7 +18,7 @@ class User < ActiveRecord::Base
   }
 
   validate :email_uniqueness, unless: :persisted?
-  validate :domain_validation
+  validate :domain_validation, unless: :persisted?
 
   has_secure_password
   validates :password, {
@@ -87,9 +88,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def init_values
+    self.is_verified = false
+    self.new_unique_token(:activation_token)
+  end
+
   def default_values
     self.email += "@#{self.domain}"
     self.email = self.email.downcase
-    self.is_verified = false
   end
 end

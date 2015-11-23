@@ -1,0 +1,7 @@
+<% if @canceled %>
+  $('#user-login').html('<%= j (render 'sessions/session_form') %>');
+<% elsif @error %>
+  $('#user-login').html('<%= j (render 'reset_form') %>');
+<% else %>
+  window.location = "<%= root_url %>";
+<% end %>

@@ -26,8 +26,8 @@
   </div>
 
   <div class="modal-footer">
-    <p class="text-left">Forgot password? Reset <%= link_to 'here', '' %></p>
-    <p class="text-left">Don't have a user? Register <%= link_to 'here', new_user_path, remote: true %></p>
+    <p class="text-left">Reset password <%= link_to 'here', new_reset_mutate_users_path, remote: true %></p>
+    <p class="text-left">Create a new user <%= link_to 'here', new_user_path, remote: true %></p>
     <div class="row">
       <div class="col-xs-6">
         <%= f.submit 'Login', class: 'btn btn-primary max-width' %>

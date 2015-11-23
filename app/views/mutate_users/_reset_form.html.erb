@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">Reset User Password</h4>
+</div>
+
+<%= form_for @reset, url: create_reset_mutate_users_path, remote: true do |f| %>
+  <div class="modal-body">
+    <div>
+      <%= render 'error_message', f: @reset, ff: :email %>
+      <%= f.email_field :email, class: 'form-control', placeholder: 'Email of your account' %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= f.submit 'Reset', class: 'btn btn-primary max-width' %>
+      </div>
+
+      <div class="col-xs-6">
+        <%= f.submit 'Cancel', class: 'btn btn-primary max-width' %>
+      </div>
+    </div>
+  </div>
+<% end %>
