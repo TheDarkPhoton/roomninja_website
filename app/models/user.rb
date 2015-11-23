@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
 
   after_initialize :init_values, unless: :persisted?
   before_save :default_values, unless: :persisted?
-  before_validation { self.email = self.email.downcase }
-  before_validation { self.domain = self.domain.downcase }
+  before_validation :modify_values, unless: :persisted?
 
   belongs_to :institution
   has_many :bookings, dependent: :destroy
@@ -93,6 +92,11 @@ class User < ActiveRecord::Base
   def init_values
     self.is_verified = false
     self.new_unique_token(:activation_token)
+  end
+
+  def modify_values
+    self.email = self.email.downcase
+    self.domain = self.domain.downcase
   end
 
   def default_values

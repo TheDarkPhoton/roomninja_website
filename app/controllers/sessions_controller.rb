@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
   def new
     if logged_in?
-      redirect_to root_url
+      respond_to { |f|
+        f.html { redirect_to user_path(@current_user) }
+        f.js { render js: "window.location = '#{user_path(@current_user)}'" }
+      }
     end
   end
 
