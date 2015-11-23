@@ -4,11 +4,13 @@ class User < ActiveRecord::Base
 
   after_initialize :init_values, unless: :persisted?
   before_save :default_values, unless: :persisted?
+  before_validation { self.email = self.email.downcase }
+  before_validation { self.domain = self.domain.downcase }
 
   belongs_to :institution
   has_many :bookings, dependent: :destroy
 
-  VALID_EMAIL_REGEX = /\A(“|”|\+|\-|\w)+\.?(“|”|\w)+\z/i
+  VALID_EMAIL_REGEX = /\A((“|”|\+|\-|\w)+\.?)+\z/i
   VALID_DOMAIN_REGEX = /\A\w+(\.|-)(\w+(\.|-))*\w+\z/i
 
   validates :email, {
@@ -94,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def default_values
-    self.email += "@#{self.domain}"
+    self.email += "@#{self.domain.downcase}"
     self.email = self.email.downcase
   end
 end
