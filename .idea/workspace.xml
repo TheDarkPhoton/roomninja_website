@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b70aec6-96c5-4c11-98ae-22d786ec203a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="roomninja_ws.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -554,7 +552,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448283087807</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Correct some problems with user creation and case sensitive emails.">
+      <created>1448284170719</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1448284170719</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -594,7 +598,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rubymine xml file update" />
     <MESSAGE value="Working sql query that finds only those rooms that don't have anything booked at this point in time." />
     <MESSAGE value="Working sql query that finds only those rooms that don't have anything booked at this point in time. (remaining files)" />
     <MESSAGE value="Improved sql query" />
@@ -619,7 +622,8 @@
     <MESSAGE value="Email controller implemented (Remaining Files)&#10;&#10;User activation and reset emails and corresponding controller methods are now setup." />
     <MESSAGE value="Emails are now sent when user is create&#10;&#10;removed some security related files from git" />
     <MESSAGE value="New user validation corrections.&#10;&#10;Emails are no longer case sensitive. Also modified email regex to allow dashes properly." />
-    <option name="LAST_COMMIT_MESSAGE" value="New user validation corrections.&#10;&#10;Emails are no longer case sensitive. Also modified email regex to allow dashes properly." />
+    <MESSAGE value="Correct some problems with user creation and case sensitive emails." />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct some problems with user creation and case sensitive emails." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
