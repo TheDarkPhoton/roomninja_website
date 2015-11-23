@@ -1,9 +1,0 @@
-<div class="col-sm-4">
-  <h3><%= f.name %></h3>
-
-  <%= form_for [f.booking_days.find_by(day: BookingDay::DAYS[@current.wday]), @booking_time], remote: true do |form| %>
-    <%= hidden_field_tag :name, f.name %>
-    <%= form.submit 'Book', class: 'btn btn-primary' %>
-  <% end %>
-
-</div>

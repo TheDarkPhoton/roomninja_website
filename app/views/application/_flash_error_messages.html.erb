@@ -1,0 +1,27 @@
+<% title = capture_html do %>
+  <%= f.form_name %> form contains <%= pluralize(f.errors[:base].count, 'error') %>
+<% end %>
+
+<% message = capture_html do %>
+  <% f.errors[:base].each do |e| %>
+    <div class="alert alert-danger">
+      <%= e %>
+    </div>
+  <% end %>
+<% end %>
+
+<div id="flash-errors">
+  <%= content_tag :div, id: 'flash-error-messages-button', style: 'display: none;', 'data-modal': 'message', 'data-title': title, 'data-message': message do %><% end %>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var flash_errors = $('#flash-errors');
+    assign_modal_event(flash_errors);
+    var button = $("#flash-error-messages-button");
+    if (button.length){
+      button.get(0).click();
+    }
+    flash_errors.remove();
+  });
+</script>

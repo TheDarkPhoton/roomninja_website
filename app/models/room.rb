@@ -1,35 +1,40 @@
 class Room < ActiveRecord::Base
-  require 'open-uri'
+  after_initialize :default_values, unless: :persisted?
 
-  has_many :booking_days, dependent: :destroy
-  accepts_nested_attributes_for :booking_days
+  belongs_to :institution
 
-  validates :name, presence: true
+  has_many :bookings, dependent: :destroy
+  accepts_nested_attributes_for :bookings
 
-  def self.generate_bookings
-    Room.destroy_all
+  validates :internal_name, presence: true
+  validates :description, presence: true
+  validates :capacity, presence: true
+  validates_inclusion_of :is_generated, in: [true, false]
 
-    data = JSON.load(open('http://www.inf.kcl.ac.uk/staff/andrew/rooms/somerooms.json'))
-
-    data['Rooms'].each do |room|
-      r = Room.new(name: room['Name'])
-
-      room['Days'].each do |day|
-        booking = r.booking_days.build(day: day['Day'])
-
-        day['Activities'].each do |activities|
-          booking.booking_times.build(begin: activities['Start'], end: activities['End'])
-        end
-      end
-
-      r.save!
-    end
+  def name
+    return self.alias unless self.alias.blank?
+    self.internal_name
   end
 
-  def self.overlapping_bookings(time)
-    joins('INNER JOIN booking_days ON booking_days.room_id = rooms.id LEFT OUTER JOIN booking_times ON booking_days.id = booking_times.booking_day_id')
-        .where(booking_days: { day: BookingDay::DAYS[time.wday] })
-        .where('? BETWEEN booking_times.begin AND booking_times.end', time)
-        .group(:name)
+  def self.overlapping_bookings(begin_time, end_time)
+    joins('LEFT OUTER JOIN bookings ON rooms.id = bookings.room_id')
+        .where('(? > bookings.begin AND ? < bookings.end) OR
+                (? > bookings.begin AND ? < bookings.end) OR
+                (? <= bookings.begin AND ? >= bookings.end)',
+               begin_time,
+               begin_time,
+               end_time,
+               end_time,
+               begin_time,
+               end_time)
+        .group(:id)
+  end
+
+  private
+
+  def default_values
+    self.description ||= 'No description provided.'
+    self.capacity ||= 0
+    self.is_generated ||= false
   end
 end

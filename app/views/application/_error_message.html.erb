@@ -1,0 +1,11 @@
+<% if f.errors[ff].present? %>
+  <div class="alert alert-danger">
+    This field contains <%= 'error'.pluralize(f.errors[ff].count) %>
+
+    <ul>
+      <% f.errors[ff].each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

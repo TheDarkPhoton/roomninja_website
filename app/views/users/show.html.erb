@@ -1,0 +1,54 @@
+<% unless @user.verified? %>
+  <% flash.now[:warning] = render 'activate_email_warning' %>
+<% end %>
+
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1><%= @user.email %></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h4>Find Rooms</h4>
+      <div class="well well-sm">
+        <div id="find-form">
+          <%= render 'bookings/find_form' %>
+        </div>
+      </div>
+
+      <h4>Your Bookings</h4>
+      <div id="user-bookings">
+        <%= render 'user_bookings' %>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <h4>Available Rooms (<%= link_to 'Refresh', bookings_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
+      <div id="room-loading-bar">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar"
+               aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+          </div>
+        </div>
+      </div>
+      <div id="room-list"></div>
+    </div>
+  </div>
+
+  <script>
+    remote_call("GET", "<%= bookings_path %>");
+  </script>
+
+  <!--<% Room.all.each do |r| %>-->
+    <!--<%= r.name %>-->
+    <!--<% r.bookings.each do |b| %>-->
+      <!--<div style="padding-left: 25px">-->
+        <!--Begin: <%= b.begin.to_s(:british_datetime) %><br>-->
+        <!--End: <%= b.end.to_s(:british_datetime) %><br><br>-->
+      <!--</div>-->
+    <!--<% end %>-->
+    <!--<% if r.bookings.empty? %>-->
+      <!--<br><br>-->
+    <!--<% end %>-->
+  <!--<% end %>-->
+</div>

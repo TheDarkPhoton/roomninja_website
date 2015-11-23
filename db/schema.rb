@@ -11,26 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115114244) do
+ActiveRecord::Schema.define(version: 20151120183306) do
 
-  create_table "booking_days", force: :cascade do |t|
-    t.string   "day"
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "begin"
+    t.datetime "end"
+    t.string   "status"
     t.integer  "room_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "booking_days", ["room_id"], name: "index_booking_days_on_room_id"
-
-  create_table "booking_times", force: :cascade do |t|
-    t.time     "begin"
-    t.time     "end"
-    t.integer  "booking_day_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "booking_times", ["booking_day_id"], name: "index_booking_times_on_booking_day_id"
+  add_index "bookings", ["room_id"], name: "index_bookings_on_room_id"
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -48,10 +42,40 @@ ActiveRecord::Schema.define(version: 20151115114244) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "institutions", force: :cascade do |t|
     t.string   "name"
+    t.string   "domain"
+    t.string   "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string   "internal_name"
+    t.string   "alias"
+    t.string   "description"
+    t.integer  "capacity"
+    t.boolean  "is_generated"
+    t.integer  "institution_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "rooms", ["institution_id"], name: "index_rooms_on_institution_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.string   "activation_token"
+    t.boolean  "is_verified"
+    t.string   "reset_token"
+    t.datetime "reset_expire"
+    t.integer  "institution_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "users", ["institution_id"], name: "index_users_on_institution_id"
 
 end

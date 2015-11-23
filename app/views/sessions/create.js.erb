@@ -1,0 +1,5 @@
+<% if @error %>
+  $('#user-login').html('<%= j (render 'session_form') %>');
+<% else %>
+  window.location = "<%= user_url(@user) %>";
+<% end %>

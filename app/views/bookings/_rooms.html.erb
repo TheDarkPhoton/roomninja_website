@@ -1,0 +1,8 @@
+<% @rooms.in_groups_of(3) do |slice| %>
+  <div class="row">
+    <% slice.each do |r| %>
+      <% next if r.nil? %>
+      <%= render 'room', f: r %>
+    <% end %>
+  </div>
+<% end %>

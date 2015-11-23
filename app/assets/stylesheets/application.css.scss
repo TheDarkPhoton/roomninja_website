@@ -16,3 +16,68 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body { padding-top: 70px; }
+
+.max-width {
+  width: 100%;
+}
+
+.spaced-row {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.date-select {
+  display: inline-block;
+  width: 32%;
+}
+
+.date-select.day, .date-select.month {
+  display: inline-block;
+  width: 30%;
+}
+.date-select.year {
+  display: inline-block;
+  width: 36%;
+}
+
+.time-select {
+  display: inline-block;
+  width: 48%;
+}
+
+.selectable:hover {
+  border-color: rgba(47, 117, 203, 0.5);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(47, 117, 203, 0.4);
+  outline: 0 none;
+}
+a.complex-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.field_with_errors {
+  color: #cb3310;
+
+  textarea,
+  input[type="text"],
+  input[type="password"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="color"],
+  .uneditable-input {
+    border-color: rgba(203, 61, 16, 0.5);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(203, 61, 16, 0.4);
+    outline: 0 none;
+  }
+}

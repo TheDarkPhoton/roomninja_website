@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">User Login</h4>
+</div>
+
+<%= form_for :session, url: login_path, remote: true do |f| %>
+  <div class="modal-body">
+      <% if @error %>
+        <div class="alert alert-danger">
+          Login details could not be recognized
+        </div>
+      <% end %>
+
+      <div>
+        <%= f.email_field :email, class: 'form-control', placeholder: 'firstname.lastname@domain.ac.uk' %>
+      </div><br>
+
+      <div>
+        <%= f.password_field :password, class: 'form-control', placeholder: 'password' %>
+      </div><br>
+
+      <%= f.label :remember_me, class: 'checkbox-inline' do %>
+        <%= f.check_box :remember_me %> Remember me on this computer
+      <% end %>
+      <br>
+  </div>
+
+  <div class="modal-footer">
+    <p class="text-left">Reset password <%= link_to 'here', new_reset_mutate_users_path, remote: true %></p>
+    <p class="text-left">Create a new user <%= link_to 'here', new_user_path, remote: true %></p>
+    <div class="row">
+      <div class="col-xs-6">
+        <%= f.submit 'Login', class: 'btn btn-primary max-width' %>
+      </div>
+
+      <div class="col-xs-6">
+        <%= f.submit 'Cancel', class: 'btn btn-primary max-width', 'data-dismiss': 'modal' %>
+      </div>
+    </div>
+  </div>
+<% end %>
