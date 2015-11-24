@@ -9,10 +9,10 @@ class Booking < ActiveRecord::Base
 
   validates :begin, presence: true
   validates :end, presence: true
-  validate :is_not_overlapping
-  validate :booking_length
-  validate :booking_datetime
-  validate :owner
+  validate :is_not_overlapping, unless: Proc.new { self.status == GENERATED }
+  validate :booking_length, unless: Proc.new { self.status == GENERATED }
+  validate :booking_datetime, unless: Proc.new { self.status == GENERATED }
+  validate :owner, unless: Proc.new { self.status == GENERATED }
 
   DAYS = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
@@ -85,7 +85,7 @@ class Booking < ActiveRecord::Base
   end
 
   def is_not_overlapping
-    if self.status != GENERATED && !self.room.bookings.overlapping(self.begin, self.end).empty?
+    unless self.room.bookings.overlapping(self.begin, self.end).empty?
       errors.add(:base, 'Your booking is overlapping another booking on this room')
     end
   end
