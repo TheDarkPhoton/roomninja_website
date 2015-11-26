@@ -31,6 +31,8 @@ class FindRoom
     self.begin ||= DateTime.now + 15.minutes
     self.for_hours ||= 1
     self.for_minutes ||= 0
+
+    self.name = self.name.downcase
   end
 
   def booking_length

@@ -50,7 +50,7 @@ class BookingsController < ApplicationController
     booking_end = @find_rooms.begin + @find_rooms.for_hours.hours + @find_rooms.for_minutes.minutes
 
     if @find_rooms.valid?
-      user_rooms = current_user.institution.rooms.where('internal_name LIKE ? or alias LIKE ?', '%'+@find_rooms.name+'%', '%'+@find_rooms.name+'%')
+      user_rooms = current_user.institution.rooms.where('LOWER(internal_name) LIKE ? or LOWER(alias) LIKE ?', '%'+@find_rooms.name+'%', '%'+@find_rooms.name+'%')
       @overlaps = user_rooms.overlapping_bookings(@find_rooms.begin, booking_end).collect { |r| r.id }
       @rooms = user_rooms.where.not(id: @overlaps)
       render :index, :formats => [:js]
