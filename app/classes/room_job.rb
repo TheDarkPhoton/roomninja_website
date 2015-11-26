@@ -2,7 +2,7 @@ class RoomJob
   require 'open-uri'
   include Delayed::RecurringJob
 
-  run_every 1.hour
+  run_every 1.minute
   queue 'slow-jobs'
 
   def perform
