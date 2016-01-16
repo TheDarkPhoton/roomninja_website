@@ -86,7 +86,7 @@ Rails.application.configure do
       :address        => ENV['MAILGUN_SMTP_SERVER'],
       :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
       :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-      :domain         => 'app61ddd7a2bb1e46b5ae3d248ac1d2dd99.mailgun.org',
+      :domain         => 'roomninja.herokuapp.com',
       :authentication => :plain,
   }
 end
