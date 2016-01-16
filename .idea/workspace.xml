@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b70aec6-96c5-4c11-98ae-22d786ec203a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-046cab1f1d0e41dba82cfbb35536b76a.js.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-8bfb8f486a070d1dd073edfd3331f1b6.css.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/bootstrap/glyphicons-halflings-regular-21d7f9622a10fe477b52d4669383bf33.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/bootstrap/glyphicons-halflings-regular-4031480adb2e20146d9d6c06855e6a21.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/bootstrap/glyphicons-halflings-regular-af674dc7931456d66fcdcb0ad81eaedb.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/bootstrap/glyphicons-halflings-regular-c575a06b0f5e17a30eccb36f64777cc3.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-046cab1f1d0e41dba82cfbb35536b76a.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-8bfb8f486a070d1dd073edfd3331f1b6.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/bootstrap/glyphicons-halflings-regular-593900095f6b4fa0bc3471bad48230d9.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/manifest-f515e0f60385c4920c2843fd467e638e.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/development.rb" afterPath="$PROJECT_DIR$/config/environments/development.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/secrets.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="roomninja_ws.iws" />
@@ -22,7 +11,6 @@
     <ignored path="log/" />
     <ignored path="tmp/" />
     <ignored path="config/application.yml" />
-    <ignored path="config/secrets.yml" />
     <ignored path="db/development.sqlite3" />
     <ignored path="config/database.yml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,16 +30,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="database.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/database.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="welcome.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/user_mailer/welcome.html.erb">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,11 +40,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="production.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="production.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.655303">
+            <state vertical-scroll-proportion="0.0">
               <caret line="89" column="32" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="secrets.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/secrets.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.95454544">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -95,7 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/models/find_room.rb" />
         <option value="$PROJECT_DIR$/app/views/bookings/find.js.erb" />
         <option value="$PROJECT_DIR$/app/views/bookings/create.js.erb" />
         <option value="$PROJECT_DIR$/app/views/application/_flash_error_messages.html.erb" />
@@ -108,7 +105,6 @@
         <option value="$PROJECT_DIR$/app/views/user_mailer/welcome.html.erb" />
         <option value="$PROJECT_DIR$/app/views/user_mailer/welcome.text.erb" />
         <option value="$PROJECT_DIR$/app/views/users/_activate_email_warning.html.erb" />
-        <option value="$PROJECT_DIR$/config/application.yml" />
         <option value="$PROJECT_DIR$/app/mailers/user_mailer.rb" />
         <option value="$PROJECT_DIR$/app/views/sessions/new.js.erb" />
         <option value="$PROJECT_DIR$/app/views/mutate_users/new_reset.js.erb" />
@@ -146,6 +142,8 @@
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/config/environments/development.rb" />
+        <option value="$PROJECT_DIR$/config/application.yml" />
+        <option value="$PROJECT_DIR$/config/secrets.yml" />
       </list>
     </option>
   </component>
@@ -592,7 +590,13 @@
       <option name="project" value="LOCAL" />
       <updated>1452963731879</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Version with precompiled assets">
+      <created>1452964744389</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1452964744389</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -632,7 +636,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Users can now be created, logged in and logged out." />
     <MESSAGE value="In user creation, separated user email into email name and email domain" />
     <MESSAGE value="Users are now associated with institutions when created" />
     <MESSAGE value="New bookings generator created" />
@@ -657,27 +660,14 @@
     <MESSAGE value="Prepared the website for heroku deployment&#10;&#10;Changed the database used to PostgreSQL and fixed some queries." />
     <MESSAGE value="Fixed migration bug&#10;&#10;The error that appears when migrating from a new database shouldn't exist anymore." />
     <MESSAGE value="Precompile asset fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Precompile asset fix" />
+    <MESSAGE value="Version with precompiled assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version with precompiled assets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/shared.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30884808">
-          <caret line="25" column="39" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_booking_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34615386">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bookings/_room.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09440559">
@@ -998,9 +988,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
+    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="32" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.816">
           <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
           <folding />
         </state>
@@ -1014,18 +1020,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+    <entry file="file://$PROJECT_DIR$/config/application.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+    <entry file="file://$PROJECT_DIR$/config/secrets.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.655303">
-          <caret line="89" column="32" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.95454544">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
