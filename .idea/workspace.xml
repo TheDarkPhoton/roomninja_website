@@ -628,7 +628,13 @@
       <option name="project" value="LOCAL" />
       <updated>1452968083595</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="More email service correction(2)">
+      <created>1452968914167</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1452968914167</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -668,7 +674,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Some graphical changes on index page&#10;&#10;Now user bookings are displayed upon login and removed upon logout" />
     <MESSAGE value="Re-designed user system and login system&#10;&#10;Prepared this system for more advanced features like, advanced room querying. There is a user page now where all room information is going to be displayed." />
     <MESSAGE value="Re-designed forms on the users panel." />
     <MESSAGE value="Implemented some minor changes to how rooms are selected in available rooms area.&#10;&#10;Removed the select button and made the entire room html element selectable instead." />
@@ -693,7 +698,8 @@
     <MESSAGE value="Emailing service corrections for heroku server" />
     <MESSAGE value="Created Procfile&#10;&#10;This is used to create a jobs worker on the heroku server." />
     <MESSAGE value="More email service correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="More email service correction" />
+    <MESSAGE value="More email service correction(2)" />
+    <option name="LAST_COMMIT_MESSAGE" value="More email service correction(2)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
