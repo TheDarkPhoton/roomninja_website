@@ -5,17 +5,17 @@
     <%= f.text_field :name, class: 'form-control', placeholder: 'Enter partial room name (not required)' %>
   </div><br>
 
-  <%= f.label :begin, 'Booking Date:' %>
+  <%= f.label :begin_time, 'Booking Date:' %>
   <div class="max-width">
-    <%= f.date_select :begin, { order: [:day, :month, :year] }, { class: 'form-control date-select' } %>
+    <%= f.date_select :begin_time, { order: [:day, :month, :year] }, { class: 'form-control date-select' } %>
   </div>
   <br>
 
   <div class="row">
     <div class="col-lg-6">
-      <%= f.label :begin, 'Start Time:' %>
+      <%= f.label :begin_time, 'Start Time:' %>
       <div class="max-width">
-        <%= f.time_select :begin,
+        <%= f.time_select :begin_time,
                           { time_separator: '', ignore_date: true },
                           { class: 'form-control time-select' }
         %>

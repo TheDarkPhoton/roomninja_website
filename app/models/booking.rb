@@ -7,8 +7,8 @@ class Booking < ActiveRecord::Base
   belongs_to :room
   belongs_to :user
 
-  validates :begin, presence: true
-  validates :end, presence: true
+  validates :begin_time, presence: true
+  validates :end_time, presence: true
   validate :is_not_overlapping, unless: Proc.new { self.status == GENERATED }
   validate :booking_length, unless: Proc.new { self.status == GENERATED }
   validate :booking_datetime, unless: Proc.new { self.status == GENERATED }
@@ -30,24 +30,18 @@ class Booking < ActiveRecord::Base
 
   def day
     begin
-      DAYS[self.begin.wday]
+      DAYS[self.begin_time.wday]
     rescue => e
       return nil
     end
   end
 
   def length
-    self.end.to_i - self.begin.to_i
+    self.end_time.to_i - self.begin_time.to_i
   end
 
   def self.overlapping(begin_time, end_time)
-    where('(? > begin AND ? < end) OR (? > begin AND ? < end) OR (? <= begin AND ? >= end)',
-          begin_time,
-          begin_time,
-          end_time,
-          end_time,
-          begin_time,
-          end_time)
+    where('(?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)', begin_time, end_time)
   end
 
   def self.booking_allowance
@@ -73,7 +67,7 @@ class Booking < ActiveRecord::Base
   end
 
   def booking_datetime
-    if self.begin < DateTime.now
+    if self.begin_time < DateTime.now
       errors.add(:base, 'Booking start date and time must be in the future')
     end
   end
@@ -85,7 +79,7 @@ class Booking < ActiveRecord::Base
   end
 
   def is_not_overlapping
-    unless self.room.bookings.overlapping(self.begin, self.end).empty?
+    unless self.room.bookings.overlapping(self.begin_time, self.end_time).empty?
       errors.add(:base, 'Your booking is overlapping another booking on this room')
     end
   end

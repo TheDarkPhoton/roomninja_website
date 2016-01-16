@@ -5,16 +5,16 @@
     <%= form_for [@room, @booking], remote: true, html: { class: 'form-horizontal' } do |f| %>
       <%= render('flash_error_messages', f: @booking) %>
 
-      <%= f.label :begin, 'Booking Date:' %>
+      <%= f.label :begin_time, 'Booking Date:' %>
       <div class="max-width">
-        <%= f.date_select :begin, { order: [:day, :month, :year], use_month_numbers: true, with_css_classes: true }, { class: 'form-control date-select' } %>
+        <%= f.date_select :begin_time, { order: [:day, :month, :year], use_month_numbers: true, with_css_classes: true }, { class: 'form-control date-select' } %>
       </div>
       <br>
 
       <div class="form-group">
-        <%= f.label :begin, 'Begin:', class: 'col-lg-3 control-label' %>
+        <%= f.label :begin_time, 'Begin:', class: 'col-lg-3 control-label' %>
         <div class="col-lg-9">
-          <%= f.time_select :begin, { time_separator: '', ignore_date: true }, { class: 'form-control time-select', 'aria-describedby': 'addon-at' } %>
+          <%= f.time_select :begin_time, { time_separator: '', ignore_date: true }, { class: 'form-control time-select', 'aria-describedby': 'addon-at' } %>
         </div>
       </div>
 

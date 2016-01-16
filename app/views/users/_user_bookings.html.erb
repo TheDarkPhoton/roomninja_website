@@ -8,8 +8,8 @@
         <b class="spaced-row"><%= b.room.name %></b><br>
         <b>Booking Details</b>
         <div style="padding-left: 15px">
-          <b>Begin:</b> <span class="pull-right"><%= b.begin.to_s(:british_datetime) %></span><br>
-          <b>End:</b> <span class="pull-right"><%= b.end.to_s(:british_datetime) %></span>
+          <b>Begin:</b> <span class="pull-right"><%= b.begin_time.to_s(:british_datetime) %></span><br>
+          <b>End:</b> <span class="pull-right"><%= b.end_time.to_s(:british_datetime) %></span>
         </div>
       </div>
     </div>
