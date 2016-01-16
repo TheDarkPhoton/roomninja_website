@@ -11,11 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120183306) do
+ActiveRecord::Schema.define(version: 20151120183307) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bookings", force: :cascade do |t|
-    t.datetime "begin"
-    t.datetime "end"
+    t.datetime "begin_time"
+    t.datetime "end_time"
     t.string   "status"
     t.integer  "room_id"
     t.integer  "user_id"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20151120183306) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "bookings", ["room_id"], name: "index_bookings_on_room_id"
-  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
+  add_index "bookings", ["room_id"], name: "index_bookings_on_room_id", using: :btree
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20151120183306) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "institutions", force: :cascade do |t|
     t.string   "name"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 20151120183306) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "rooms", ["institution_id"], name: "index_rooms_on_institution_id"
+  add_index "rooms", ["institution_id"], name: "index_rooms_on_institution_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -76,6 +79,6 @@ ActiveRecord::Schema.define(version: 20151120183306) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "users", ["institution_id"], name: "index_users_on_institution_id"
+  add_index "users", ["institution_id"], name: "index_users_on_institution_id", using: :btree
 
 end

@@ -2,7 +2,7 @@ class RoomJob
   require 'open-uri'
   include Delayed::RecurringJob
 
-  run_every 1.hour
+  run_every 1.minute
   queue 'slow-jobs'
 
   def perform
@@ -38,7 +38,7 @@ class RoomJob
   end
 
   def bookings_generator(room, day, date)
-    saved_bookings = room.bookings.where(user_id: nil).where('? < begin AND ? > begin', date, date + 1.day)
+    saved_bookings = room.bookings.where(user_id: nil).where('? < begin_time AND ? > begin_time', date, date + 1.day)
 
     update_count = 0
     day['Activities'].each_with_index do |activity, index|
@@ -50,7 +50,7 @@ class RoomJob
       begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
       end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
 
-      saved_bookings[index].update_attributes(begin: begin_date, end: end_date, status: Booking::GENERATED)
+      saved_bookings[index].update_attributes(begin_time: begin_date, end_time: end_date, status: Booking::GENERATED)
       check_if_overlaps(room, saved_bookings[index])
     end
 
@@ -61,7 +61,7 @@ class RoomJob
         begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
         end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
 
-        booking = room.bookings.build(begin: begin_date, end: end_date, status: Booking::GENERATED)
+        booking = room.bookings.build(begin_time: begin_date, end_time: end_date, status: Booking::GENERATED)
         booking.save!
 
         check_if_overlaps(room, booking)
@@ -70,8 +70,8 @@ class RoomJob
   end
 
   def check_if_overlaps(room, booking)
-    booking_begin = booking.begin.to_s(:db)
-    booking_end = booking.end.to_s(:db)
+    booking_begin = booking.begin_time.to_s(:db)
+    booking_end = booking.end_time.to_s(:db)
 
     room.bookings.where.not(id: booking.id).where('user_id IS NOT NULL').overlapping(booking_begin, booking_end).destroy_all
   end

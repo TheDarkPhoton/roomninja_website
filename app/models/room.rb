@@ -18,15 +18,7 @@ class Room < ActiveRecord::Base
 
   def self.overlapping_bookings(begin_time, end_time)
     joins('LEFT OUTER JOIN bookings ON rooms.id = bookings.room_id')
-        .where('(? > bookings.begin AND ? < bookings.end) OR
-                (? > bookings.begin AND ? < bookings.end) OR
-                (? <= bookings.begin AND ? >= bookings.end)',
-               begin_time,
-               begin_time,
-               end_time,
-               end_time,
-               begin_time,
-               end_time)
+        .where('(?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)', begin_time, end_time)
         .group(:id)
   end
 

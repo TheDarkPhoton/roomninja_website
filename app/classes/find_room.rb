@@ -3,9 +3,9 @@ class FindRoom
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
 
-  attr_accessor :name, :begin, :for_hours, :for_minutes
+  attr_accessor :name, :begin_time, :for_hours, :for_minutes
 
-  validates :begin, presence: true
+  validates :begin_time, presence: true
   validates :for_hours, presence: true
   validates :for_minutes, presence: true
   validate :booking_datetime
@@ -28,9 +28,11 @@ class FindRoom
 
   def default_values
     self.name ||= ''
-    self.begin ||= DateTime.now + 15.minutes
+    self.begin_time ||= DateTime.now + 15.minutes
     self.for_hours ||= 1
     self.for_minutes ||= 0
+
+    self.name = self.name.downcase
   end
 
   def booking_length
@@ -40,7 +42,7 @@ class FindRoom
   end
 
   def booking_datetime
-    if self.begin < DateTime.now
+    if self.begin_time < DateTime.now
       errors.add(:base, "You can't search for bookings in the past, past bookings are not allowed")
     end
   end
