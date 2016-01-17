@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <h4>Your Bookings</h4>
+      <h4>Unofficial Bookings</h4>
       <div id="user-bookings">
         <%= render 'user_bookings' %>
       </div>
@@ -39,17 +39,4 @@
   <script>
     remote_call("GET", "<%= bookings_path %>");
   </script>
-
-  <!--<% Room.all.each do |r| %>-->
-    <!--<%= r.name %>-->
-    <!--<% r.bookings.each do |b| %>-->
-      <!--<div style="padding-left: 25px">-->
-        <!--Begin: <%= b.begin_time.to_s(:british_datetime) %><br>-->
-        <!--End: <%= b.end_time.to_s(:british_datetime) %><br><br>-->
-      <!--</div>-->
-    <!--<% end %>-->
-    <!--<% if r.bookings.empty? %>-->
-      <!--<br><br>-->
-    <!--<% end %>-->
-  <!--<% end %>-->
 </div>

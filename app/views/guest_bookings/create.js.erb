@@ -1,0 +1,8 @@
+<% if @canceled %>
+  $('#room-id-<%= @room.id %>').replaceWith('<%= j (render 'room', f: @room) %>');
+<% elsif @error %>
+  $('#room-id-<%= params[:room_id] %>').replaceWith('<%= j (render 'booking_form') %>');
+<% else %>
+  $('#room-loading-bar').show();
+  remote_call("GET", "<%= guest_bookings_path %>");
+<% end %>

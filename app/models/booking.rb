@@ -59,10 +59,16 @@ class Booking < ActiveRecord::Base
       errors.add(:base, "#{Booking::minimum_booking.to_time_string} is the minimum booking length")
     end
 
-    existing_booking_length = self.user.bookings.map(&:length).inject(0, &:+)
-    if !self.user.nil? && (existing_booking_length + self.length) > Booking::booking_allowance
-      errors.add(:base, "You can have #{Booking::booking_allowance.to_time_string} worth of active bookings in total, this booking would exceed that limit.")
-      errors.add(:base, "Your current bookings take #{existing_booking_length.to_time_string} in total, you have #{(5.hours - existing_booking_length).to_time_string} left on your allowance.")
+    if self.user.nil?
+      if self.length > 1.hour
+        errors.add(:base, 'Guests are not allowed to make bookings exceeding 1 hour')
+      end
+    else
+      existing_booking_length = self.user.bookings.map(&:length).inject(0, &:+)
+      if !self.user.nil? && (existing_booking_length + self.length) > Booking::booking_allowance # TODO remove first clause probably
+        # errors.add(:base, "You can have #{Booking::booking_allowance.to_time_string} worth of active bookings in total, this booking would exceed that limit.")
+        errors.add(:base, "Your current bookings take #{existing_booking_length.to_time_string} in total, you have #{(5.hours - existing_booking_length).to_time_string} left on your allowance.")
+      end
     end
   end
 
@@ -73,6 +79,7 @@ class Booking < ActiveRecord::Base
   end
 
   def owner
+    return if self.user.nil?
     unless self.user.verified?
       errors.add(:base, 'You must first verify your email before you can make any bookings')
     end
