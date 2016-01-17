@@ -24,8 +24,8 @@
       <div class="collapse navbar-collapse" id="roomninja-menu">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="<%= root_url %>">Home</a></li>
-          <li><a href="#">Institutions</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="">Institutions</a></li>
+          <li><a href="">About</a></li>
           <% if logged_in? %>
             <% if params[:controller] != 'users' || params[:action] != 'show' %>
               <li><%= link_to 'User Panel', current_user %></li>
