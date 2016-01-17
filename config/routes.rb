@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     resources :bookings, shallow: true, only: [:new, :create, :destroy]
   end
 
+  resources :guest_bookings, only: [:index, :new, :create, :destroy] do
+    collection {
+      post 'find'
+    }
+  end
+
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'

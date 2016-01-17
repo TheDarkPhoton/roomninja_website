@@ -1,3 +1,7 @@
 $('#user-booking-<%= @booking.id %>').remove();
+<% unless current_user.bookings.size > 0 %>
+  $('#user-bookings').html('<%= j (render 'users/user_bookings') %>');
+<% end %>
+
 $('#room-loading-bar').show();
 remote_call("GET", "<%= bookings_path %>");

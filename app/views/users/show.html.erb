@@ -4,21 +4,22 @@
 
 <div class="container">
   <div class="jumbotron text-center">
-    <h1><%= @user.email %></h1>
+    <h1 class="hidden-xs" style="word-wrap:break-word"><%= @user.email %></h1>
+    <h3 class="visible-xs" style="word-wrap:break-word"><%= @user.email %></h3>
   </div>
 
   <div class="row">
     <div class="col-lg-4">
+      <h4>Unofficial Bookings</h4>
+      <div id="user-bookings">
+        <%= render 'user_bookings' %>
+      </div>
+
       <h4>Find Rooms</h4>
       <div class="well well-sm">
         <div id="find-form">
           <%= render 'bookings/find_form' %>
         </div>
-      </div>
-
-      <h4>Your Bookings</h4>
-      <div id="user-bookings">
-        <%= render 'user_bookings' %>
       </div>
     </div>
 
@@ -38,17 +39,4 @@
   <script>
     remote_call("GET", "<%= bookings_path %>");
   </script>
-
-  <!--<% Room.all.each do |r| %>-->
-    <!--<%= r.name %>-->
-    <!--<% r.bookings.each do |b| %>-->
-      <!--<div style="padding-left: 25px">-->
-        <!--Begin: <%= b.begin_time.to_s(:british_datetime) %><br>-->
-        <!--End: <%= b.end_time.to_s(:british_datetime) %><br><br>-->
-      <!--</div>-->
-    <!--<% end %>-->
-    <!--<% if r.bookings.empty? %>-->
-      <!--<br><br>-->
-    <!--<% end %>-->
-  <!--<% end %>-->
 </div>
