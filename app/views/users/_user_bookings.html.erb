@@ -1,4 +1,10 @@
 <div class="row">
+  <% if current_user.bookings.empty? %>
+    <div class="col-lg-12">
+      NONE
+    </div>
+  <% end %>
+
   <% current_user.bookings.each do |b| %>
     <div id="user-booking-<%= b.id %>" class="col-lg-12">
       <div class="well well-sm">

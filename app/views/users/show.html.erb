@@ -10,16 +10,16 @@
 
   <div class="row">
     <div class="col-lg-4">
+      <h4>Unofficial Bookings</h4>
+      <div id="user-bookings">
+        <%= render 'user_bookings' %>
+      </div>
+
       <h4>Find Rooms</h4>
       <div class="well well-sm">
         <div id="find-form">
           <%= render 'bookings/find_form' %>
         </div>
-      </div>
-
-      <h4>Unofficial Bookings</h4>
-      <div id="user-bookings">
-        <%= render 'user_bookings' %>
       </div>
     </div>
 
