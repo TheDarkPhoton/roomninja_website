@@ -1,4 +1,5 @@
 var room_list = $('#room-list');
 
 room_list.html('<%= j (render 'rooms') %>');
+assign_show_target('#room-list');
 $('#room-loading-bar').hide();

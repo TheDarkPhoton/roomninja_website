@@ -1,1 +1,3 @@
 $('#room-id-<%= params[:room_id] %>').replaceWith('<%= j (render 'booking_form') %>');
+assign_show_target('#room-id-<%= params[:room_id] %>');
+$('#room-loading-bar').hide();
