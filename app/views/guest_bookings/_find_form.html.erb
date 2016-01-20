@@ -1,8 +1,16 @@
 <%= form_for @find_rooms, url: find_guest_bookings_path, remote: true do |f| %>
   <%= render('flash_error_messages', f: @find_rooms) %>
 
-  <div>
-    <%= f.text_field :name, class: 'form-control', placeholder: 'Enter partial room name (not required)' %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :name, 'Room name:' %>
+      <%= f.text_field :name, class: 'form-control', placeholder: 'optional' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :people, 'People:' %>
+      <%= f.number_field :people, placeholder: '1', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>
+    </div>
   </div><br>
 
   <%= f.label :begin_time, 'Booking Date:' %>
@@ -12,7 +20,7 @@
   <br>
 
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-md-6">
       <%= f.label :begin_time, 'Start Time:' %>
       <div class="max-width">
         <%= f.time_select :begin_time,
@@ -21,7 +29,7 @@
         %>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-md-6">
       <%= f.label :for, 'Length:' %>
       <div class="input-group">
         <%= f.number_field :for_hours, placeholder: '0', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>

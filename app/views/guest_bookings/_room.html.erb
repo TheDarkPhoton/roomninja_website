@@ -1,9 +1,9 @@
 <div id="room-id-<%= f.id %>" class="col-sm-4">
-  <%= link_to new_guest_booking_path(room_id: f.id, begin_time: @find_rooms.begin_time, for_hours: @find_rooms.for_hours, for_minutes: @find_rooms.for_minutes), remote: true, class: 'complex-link', 'show-target': '#room-loading-bar' do %>
+  <%= link_to new_guest_booking_path(room_id: f.id, people: @find_rooms.people, begin_time: @find_rooms.begin_time, for_hours: @find_rooms.for_hours, for_minutes: @find_rooms.for_minutes), remote: true, class: 'complex-link', 'show-target': '#room-loading-bar' do %>
     <div class="well well-sm selectable">
       <b class="spaced-row"><%= f.name %></b><br>
       <p>Description: <%= f.description %></p>
-      <p>Capacity: <%= f.capacity %></p>
+      <p>Capacity: <%= f.count_people_at(@find_rooms.begin_time, @find_rooms.end_time) %>/<%= f.capacity %></p>
     </div>
   <% end %>
 </div>
