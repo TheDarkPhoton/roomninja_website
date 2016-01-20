@@ -9,6 +9,8 @@ class Booking < ActiveRecord::Base
 
   validates :begin_time, presence: true
   validates :end_time, presence: true
+
+  validate :number_of_people
   validate :is_not_overlapping, unless: Proc.new { self.status == GENERATED }
   validate :booking_length, unless: Proc.new { self.status == GENERATED }
   validate :booking_datetime, unless: Proc.new { self.status == GENERATED }
@@ -28,6 +30,10 @@ class Booking < ActiveRecord::Base
     "#{self.room.name} booking"
   end
 
+  def calculate_end_time
+    self.end_time = self.begin_time + self.for_hours.hours + self.for_minutes.minutes
+  end
+
   def day
     begin
       DAYS[self.begin_time.wday]
@@ -44,6 +50,17 @@ class Booking < ActiveRecord::Base
     where('(?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)', begin_time, end_time)
   end
 
+  def self.invalid(begin_time, end_time, people, room_id)
+    find_by_sql(['
+      SELECT rooms.id
+      FROM rooms
+      WHERE rooms.capacity < (? + (SELECT COALESCE(sum(b1.people), 0)
+                              FROM bookings AS b1
+                              WHERE b1.room_id = ?
+                              AND (?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)))
+    ', people, room_id, begin_time, end_time])
+  end
+
   def self.booking_allowance
     5.hours
   end
@@ -53,6 +70,12 @@ class Booking < ActiveRecord::Base
   end
 
   private
+
+  def number_of_people
+    # if self.people < 1 && self.people > self.room.capacity
+    #   errors.add(:base, 'The number of people must not be less then 1 and should not exceed the capacity of the room')
+    # end
+  end
 
   def booking_length
     if self.length < Booking::minimum_booking
@@ -86,8 +109,8 @@ class Booking < ActiveRecord::Base
   end
 
   def is_not_overlapping
-    unless self.room.bookings.overlapping(self.begin_time, self.end_time).empty?
-      errors.add(:base, 'Your booking is overlapping another booking on this room')
+    unless self.room.bookings.invalid(self.begin_time, self.end_time, self.people, self.room_id).empty?
+      errors.add(:base, 'This booking has too many people in it')
     end
   end
 end

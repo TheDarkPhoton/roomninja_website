@@ -16,10 +16,20 @@ class Room < ActiveRecord::Base
     self.internal_name
   end
 
-  def self.overlapping_bookings(begin_time, end_time)
-    joins('LEFT OUTER JOIN bookings ON rooms.id = bookings.room_id')
-        .where('(?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)', begin_time, end_time)
-        .group(:id)
+  def self.invalid_bookings(begin_time, end_time, people)
+    find_by_sql(['
+      SELECT rooms.id
+      FROM rooms
+      WHERE rooms.capacity < (? + (SELECT COALESCE(sum(b1.people), 0)
+                              FROM bookings AS b1
+                              WHERE b1.room_id = rooms.id
+                              AND (?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)))
+      GROUP BY rooms.id
+    ', people, begin_time, end_time])
+  end
+
+  def count_people_at(begin_time, end_time)
+    self.bookings.where('(?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)', begin_time, end_time).sum(:people)
   end
 
   private

@@ -3,8 +3,9 @@ class FindRoom
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
 
-  attr_accessor :name, :begin_time, :for_hours, :for_minutes
+  attr_accessor :name, :people, :begin_time, :for_hours, :for_minutes
 
+  validates_numericality_of :people, greater_than_or_equal_to: 1
   validates :begin_time, presence: true
   validates :for_hours, presence: true
   validates :for_minutes, presence: true
@@ -24,10 +25,15 @@ class FindRoom
     'Find rooms'
   end
 
+  def end_time
+    self.begin_time + self.for_hours.hours + self.for_minutes.minutes
+  end
+
   private
 
   def default_values
     self.name ||= ''
+    self.people ||= 1
     self.begin_time ||= DateTime.now + 15.minutes
     self.for_hours ||= 1
     self.for_minutes ||= 0
