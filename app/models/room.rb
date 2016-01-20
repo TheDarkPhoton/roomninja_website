@@ -26,12 +26,10 @@ class Room < ActiveRecord::Base
                               AND (?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)))
       GROUP BY rooms.id
     ', people, begin_time, end_time])
+  end
 
-    # joins('LEFT OUTER JOIN bookings ON rooms.id = bookings.room_id')
-    #     .where('
-    #       (?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)',
-    #       begin_time, end_time)
-    #     .group(:id)
+  def count_people_at(begin_time, end_time)
+    self.bookings.where('(?, ?) OVERLAPS (begin_time::TIMESTAMP, end_time::TIMESTAMP)', begin_time, end_time).sum(:people)
   end
 
   private

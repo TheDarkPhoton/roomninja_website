@@ -25,6 +25,10 @@ class FindRoom
     'Find rooms'
   end
 
+  def end_time
+    self.begin_time + self.for_hours.hours + self.for_minutes.minutes
+  end
+
   private
 
   def default_values

@@ -12,6 +12,13 @@
       <br>
 
       <div class="form-group">
+        <%= f.label :people, 'People:', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.number_field :people, placeholder: '1', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>
+        </div>
+      </div>
+
+      <div class="form-group">
         <%= f.label :begin_time, 'Begin:', class: 'col-lg-3 control-label' %>
         <div class="col-lg-9">
           <%= f.time_select :begin_time, { time_separator: '', ignore_date: true }, { class: 'form-control time-select', 'aria-describedby': 'addon-at' } %>
