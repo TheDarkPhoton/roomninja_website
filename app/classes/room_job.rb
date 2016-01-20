@@ -24,6 +24,7 @@ class RoomJob
     data['Rooms'].each do |room|
       r = institution.rooms.where(is_generated: true).find_by(internal_name: room['Name'].strip)
       r = Room.new(internal_name: room['Name'].strip, is_generated: true) if r.nil?
+      r.capacity = 1
 
       room['Days'].each do |day|
         date = Date.today.at_beginning_of_week + week_days.index(day['Day'].strip).days
@@ -50,8 +51,15 @@ class RoomJob
       begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
       end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
 
-      saved_bookings[index].update_attributes(begin_time: begin_date, end_time: end_date, status: Booking::GENERATED)
-      check_if_overlaps(room, saved_bookings[index])
+      saved_bookings[index].update_attributes(
+          begin_time: begin_date,
+          end_time: end_date,
+          people: room.capacity,
+          status: Booking::GENERATED)
+
+      check_if_overlaps(
+          room,
+          saved_bookings[index])
     end
 
     if day['Activities'].count < saved_bookings.count
@@ -61,7 +69,11 @@ class RoomJob
         begin_date = DateTime.parse("#{date.to_s}T#{activity['Start']}")
         end_date = DateTime.parse("#{date.to_s}T#{activity['End']}")
 
-        booking = room.bookings.build(begin_time: begin_date, end_time: end_date, status: Booking::GENERATED)
+        booking = room.bookings.build(
+            begin_time: begin_date,
+            end_time: end_date,
+            people: room.capacity,
+            status: Booking::GENERATED)
         booking.save!
 
         check_if_overlaps(room, booking)

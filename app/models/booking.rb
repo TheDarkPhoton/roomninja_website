@@ -9,6 +9,8 @@ class Booking < ActiveRecord::Base
 
   validates :begin_time, presence: true
   validates :end_time, presence: true
+
+  validate :number_of_people
   validate :is_not_overlapping, unless: Proc.new { self.status == GENERATED }
   validate :booking_length, unless: Proc.new { self.status == GENERATED }
   validate :booking_datetime, unless: Proc.new { self.status == GENERATED }
@@ -53,6 +55,12 @@ class Booking < ActiveRecord::Base
   end
 
   private
+
+  def number_of_people
+    if self.people < 1 && self.people > self.room.capacity
+      errors.add(:base, 'The number of people must not be less then 1 and should not exceed the capacity of the room')
+    end
+  end
 
   def booking_length
     if self.length < Booking::minimum_booking
