@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b70aec6-96c5-4c11-98ae-22d786ec203a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_booking_form.html.erb" afterPath="$PROJECT_DIR$/app/views/bookings/_booking_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/guest_bookings/_booking_form.html.erb" afterPath="$PROJECT_DIR$/app/views/guest_bookings/_booking_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_room.html.erb" afterPath="$PROJECT_DIR$/app/views/bookings/_room.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/guest_bookings/_room.html.erb" afterPath="$PROJECT_DIR$/app/views/guest_bookings/_room.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/users/_user_bookings.html.erb" afterPath="$PROJECT_DIR$/app/views/users/_user_bookings.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/booking.rb" afterPath="$PROJECT_DIR$/app/models/booking.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/bookings_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/bookings_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/classes/find_room.rb" afterPath="$PROJECT_DIR$/app/classes/find_room.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/room.rb" afterPath="$PROJECT_DIR$/app/models/room.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="roomninja_ws.iws" />
@@ -38,7 +29,18 @@
     <favorites_list name="roomninja_ws" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="guest_bookings_controller.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5877551">
+              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -100,8 +102,8 @@
         <option value="$PROJECT_DIR$/app/views/bookings/_room.html.erb" />
         <option value="$PROJECT_DIR$/app/views/users/_user_bookings.html.erb" />
         <option value="$PROJECT_DIR$/app/views/guest_bookings/_booking_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/guest_bookings/_room.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb" />
       </list>
     </option>
   </component>
@@ -172,72 +174,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="users" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roomninja_ws" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roomninja_ws" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roomninja_ws" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roomninja_ws" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="guest_bookings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roomninja_ws" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="roomninja_ws" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bookings" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -721,7 +657,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453318263302</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Bookings now account for the capacity of the room and the number of people on the booking.">
+      <created>1453324311060</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1453324311060</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -761,7 +703,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implemented redirects for actions that can only be made by logged in users." />
     <MESSAGE value="Correct user registration validation&#10;&#10;Users with the same email can no longer be created." />
     <MESSAGE value="Added booking length validations&#10;&#10;Bookings minimum length limit and one user can no longer book more then 5 hours worth of bookings." />
     <MESSAGE value="Added validation on find rooms form&#10;&#10;find rooms form will now prevent searches with booking length less then 15 and searches in the past." />
@@ -786,7 +727,8 @@
     <MESSAGE value="Minor corrections to user's unofficial bookings section&#10;&#10;It is now displayed above search bookings section.&#10;If there are no bookings made then 'NONE' is displayed to indicate that there are no bookings made at the moment." />
     <MESSAGE value="Added an ability to represent capacity and people for bookings&#10;&#10;Capacity is an attribute of a room and it describes the number of people that can fit in a room.&#10;People is an attribute of a booking and it describes how many people are associated with that booking." />
     <MESSAGE value="Search query modifications added&#10;&#10;It will now account for the number of people bookings." />
-    <option name="LAST_COMMIT_MESSAGE" value="Search query modifications added&#10;&#10;It will now account for the number of people bookings." />
+    <MESSAGE value="Bookings now account for the capacity of the room and the number of people on the booking." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bookings now account for the capacity of the room and the number of people on the booking." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1150,14 +1092,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39065108">
-          <caret line="37" column="10" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bookings/_room.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12587413">
@@ -1170,6 +1104,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30050084">
           <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/guest_bookings_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5877551">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
           <folding />
         </state>
       </provider>

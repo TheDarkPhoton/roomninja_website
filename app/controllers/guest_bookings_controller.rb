@@ -3,7 +3,7 @@ class GuestBookingsController < ApplicationController
   def index
     @find_rooms = FindRoom.new
 
-    user_rooms = current_user.institution.rooms
+    user_rooms = Room.all
     @overlaps = user_rooms.invalid_bookings(@find_rooms.begin_time, @find_rooms.end_time, @find_rooms.people).collect { |r| r.id }
     @rooms = user_rooms.where.not(id: @overlaps)
   end
@@ -39,7 +39,7 @@ class GuestBookingsController < ApplicationController
     @find_rooms = FindRoom.new(find_rooms_params)
 
     if @find_rooms.valid?
-      user_rooms = current_user.institution.rooms.where('LOWER(internal_name) LIKE ? or LOWER(alias) LIKE ?', '%'+@find_rooms.name+'%', '%'+@find_rooms.name+'%')
+      user_rooms = Room.where('LOWER(internal_name) LIKE ? or LOWER(alias) LIKE ?', '%'+@find_rooms.name+'%', '%'+@find_rooms.name+'%')
       @overlaps = user_rooms.invalid_bookings(@find_rooms.begin_time, @find_rooms.end_time, @find_rooms.people).collect { |r| r.id }
       @rooms = user_rooms.where.not(id: @overlaps)
       render :index, :formats => [:js]
