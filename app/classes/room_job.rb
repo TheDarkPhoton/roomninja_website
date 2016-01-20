@@ -24,7 +24,7 @@ class RoomJob
     data['Rooms'].each do |room|
       r = institution.rooms.where(is_generated: true).find_by(internal_name: room['Name'].strip)
       r = Room.new(internal_name: room['Name'].strip, is_generated: true) if r.nil?
-      r.capacity = 1
+      r.capacity = 10
 
       room['Days'].each do |day|
         date = Date.today.at_beginning_of_week + week_days.index(day['Day'].strip).days

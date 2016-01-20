@@ -57,9 +57,9 @@ class Booking < ActiveRecord::Base
   private
 
   def number_of_people
-    if self.people < 1 && self.people > self.room.capacity
-      errors.add(:base, 'The number of people must not be less then 1 and should not exceed the capacity of the room')
-    end
+    # if self.people < 1 && self.people > self.room.capacity
+    #   errors.add(:base, 'The number of people must not be less then 1 and should not exceed the capacity of the room')
+    # end
   end
 
   def booking_length
