@@ -1,0 +1,51 @@
+<div id="room-id-<%= @room.id %>" class="col-sm-4">
+  <div class="well well-sm">
+    <b class="spaced-row"><%= @room.name %></b><br>
+
+    <%= form_for [@room, @booking], remote: true, html: { class: 'form-horizontal' } do |f| %>
+      <%= render('flash_error_messages', f: @booking) %>
+
+      <%= f.label :begin_time, 'Booking Date:' %>
+      <div class="max-width">
+        <%= f.date_select :begin_time, { order: [:day, :month, :year], use_month_numbers: true, with_css_classes: true }, { class: 'form-control date-select' } %>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <%= f.label :people, 'People:', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.number_field :people, placeholder: '1', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :begin_time, 'Begin:', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.time_select :begin_time, { time_separator: '', ignore_date: true }, { class: 'form-control time-select', 'aria-describedby': 'addon-at' } %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :for, 'Length:', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <div class="input-group">
+            <%= f.number_field :for_hours, placeholder: '1', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-booking-length' %>
+            <span class="input-group-addon" id="addon-booking-length">h</span>
+            <%= f.number_field :for_minutes, placeholder: '15', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-booking-length' %>
+            <span class="input-group-addon" id="addon-booking-length">m</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <%= f.submit 'Book', class: 'btn btn-primary max-width', 'show-target': '#room-loading-bar' %>
+        </div>
+
+        <div class="col-xs-6">
+          <%= f.submit 'Cancel', class: 'btn btn-primary max-width', 'show-target': '#room-loading-bar' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

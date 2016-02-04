@@ -1,0 +1,14 @@
+<% if @canceled %>
+  $('#room-id-<%= @room.id %>').replaceWith('<%= j (render 'room', f: @room) %>');
+  assign_show_target('#room-id-<%= @room.id %>');
+  $('#room-loading-bar').hide();
+<% elsif @error %>
+  $('#room-id-<%= params[:room_id] %>').replaceWith('<%= j (render 'booking_form') %>');
+  assign_show_target('#room-id-<%= @room.id %>');
+  $('#room-loading-bar').hide();
+<% else %>
+  $('#room-loading-bar').show();
+  $('#user-bookings').html('<%= j (render 'users/user_bookings') %>');
+  assign_modal_event('#user-bookings');
+  remote_call("GET", "<%= bookings_path %>");
+<% end %>

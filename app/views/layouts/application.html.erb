@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RoomninjaWs</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#roomninja-menu" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_url %>">Brand</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="roomninja-menu">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="<%= root_url %>">Home</a></li>
+          <li><a href="">Institutions</a></li>
+          <li><a href="">About</a></li>
+          <% if logged_in? %>
+            <% if params[:controller] != 'users' || params[:action] != 'show' %>
+              <li><%= link_to 'User Panel', current_user %></li>
+            <% end %>
+            <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Login', login_path, remote: true, 'data-toggle': 'modal', 'data-target': '#login-modal' %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div id="room-loading-bar" class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          <span class="sr-only">45% Complete</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="login-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div id="user-login" class="modal-content">
+        <%= render 'sessions/session_form' %>
+      </div>
+    </div>
+  </div>
+
+  <div id="flashes" class="container">
+    <% if flash.count > 0 %>
+      <%= render 'flashes' %>
+      <script>
+        $(document).ready(function() {
+          var button = $("#flash-button");
+          if (button.length)
+            button.get(0).click();
+
+          button.remove();
+        });
+      </script>
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+  <%= render 'popup_modal' %>
+
+  <!--<%= debug(params) if Rails.env.development? %>-->
+</body>
+</html>

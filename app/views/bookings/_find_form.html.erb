@@ -1,0 +1,47 @@
+<%= form_for @find_rooms, url: find_bookings_path, remote: true do |f| %>
+  <%= render('flash_error_messages', f: @find_rooms) %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :name, 'Room name:' %>
+      <%= f.text_field :name, class: 'form-control', placeholder: 'optional' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :people, 'People:' %>
+      <%= f.number_field :people, placeholder: '1', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>
+    </div>
+  </div><br>
+
+  <%= f.label :begin_time, 'Booking Date:' %>
+  <div class="max-width">
+    <%= f.date_select :begin_time, { order: [:day, :month, :year] }, { class: 'form-control date-select' } %>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :begin_time, 'Start Time:' %>
+      <div class="max-width">
+        <%= f.time_select :begin_time,
+                          { time_separator: '', ignore_date: true },
+                          { class: 'form-control time-select' }
+        %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :for, 'Length:' %>
+      <div class="input-group">
+        <%= f.number_field :for_hours, placeholder: '0', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>
+        <span class="input-group-addon" id="addon-search-length">h</span>
+        <%= f.number_field :for_minutes, placeholder: '15', class: 'form-control', style: '-moz-appearance: textfield', 'aria-describedby': 'addon-search-length' %>
+        <span class="input-group-addon" id="addon-search-length">m</span>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <%= f.button class: 'btn btn-primary max-width', 'show-target': '#room-loading-bar' do %>
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+  <% end %>
+<% end %>

@@ -1,0 +1,11 @@
+<% title = capture_html do %>
+  You have <%= pluralize(flash.count, 'message') %>
+<% end %>
+
+<% message = capture_html do %>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, id: 'flash-button', style: 'display: none;', 'data-modal': 'message', 'data-title': title, 'data-message': message do %><% end %>

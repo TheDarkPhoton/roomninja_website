@@ -1,0 +1,35 @@
+<% unless @user.verified? %>
+  <% flash.now[:warning] = render 'activate_email_warning' %>
+<% end %>
+
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1 class="hidden-xs" style="word-wrap:break-word"><%= @user.email %></h1>
+    <h3 class="visible-xs" style="word-wrap:break-word"><%= @user.email %></h3>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h4>Unofficial Bookings</h4>
+      <div id="user-bookings">
+        <%= render 'user_bookings' %>
+      </div>
+
+      <h4>Find Rooms</h4>
+      <div class="well well-sm">
+        <div id="find-form">
+          <%= render 'bookings/find_form' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <h4>Available Rooms (<%= link_to 'Refresh', bookings_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
+      <div id="room-list"></div>
+    </div>
+  </div>
+
+  <script>
+    remote_call("GET", "<%= bookings_path %>");
+  </script>
+</div>

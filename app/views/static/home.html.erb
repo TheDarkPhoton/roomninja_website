@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Welcome to Room Ninja</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h4>Find Rooms</h4>
+      <div class="well well-sm">
+        <div id="find-form">
+          <%= render 'guest_bookings/find_form' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h4>Available Rooms (<%= link_to 'Refresh', guest_bookings_path, remote: true, 'show-target': '#room-loading-bar' %>)</h4>
+      <div id="room-list"></div>
+    </div>
+  </div>
+
+  <script>
+    remote_call("GET", "<%= guest_bookings_path %>");
+  </script>
+
+  <% if params[:reset_token].present? %>
+    <script>
+      remote_call('GET', '<%= new_password_mutate_user_path(params[:reset_token]) %>');
+    </script>
+  <% end %>
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+  <% if current_user.bookings.empty? %>
+    <div class="col-lg-12">
+      NONE
+    </div>
+  <% end %>
+
+  <% current_user.bookings.each do |b| %>
+    <div id="user-booking-<%= b.id %>" class="col-lg-12">
+      <div class="well well-sm">
+        <%= link_to booking_path(b), method: :delete, remote: true, class: 'close', 'data-modal': 'confirm', 'data-title': 'Confirmation Required!', 'data-message': 'Do you really want to cancel this booking permanently?' do %>
+          &times;
+        <% end %>
+        <b class="spaced-row"><%= b.room.name %></b><br>
+        <b>Booking Details</b>
+        <div style="padding-left: 15px">
+          <b>Begin:</b> <span class="pull-right"><%= b.begin_time.to_s(:british_datetime) %></span><br>
+          <b>End:</b> <span class="pull-right"><%= b.end_time.to_s(:british_datetime) %></span><br>
+          <b>People:</b> <span class="pull-right"><%= b.people %></span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
